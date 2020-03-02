@@ -12,6 +12,7 @@ export const useStyles = makeStyles(theme => ({
     },
     userButton: {
         margin: 0,
+        color: theme.color.white,
     },
     toolbar: {
         padding: 0,

@@ -16,6 +16,11 @@ const DATA = [
     },
     { id: randomId(), category: 'Pop', artist: 'LP', name: 'Lost On You', likes: 5, audio: 'audio.mp3' },
     { id: randomId(), category: 'Rap', artist: 'Altın Gün', name: 'Goca Dünya', likes: 8, audio: 'audio.mp3' },
+    { id: randomId(), category: 'Rap', artist: 'Altın Gün', name: 'Goca Dünya', likes: 8, audio: 'audio.mp3' },
+    { id: randomId(), category: 'Rap', artist: 'Altın Gün', name: 'Goca Dünya', likes: 8, audio: 'audio.mp3' },
+    { id: randomId(), category: 'Rap', artist: 'Altın Gün', name: 'Goca Dünya', likes: 8, audio: 'audio.mp3' },
+    { id: randomId(), category: 'Rap', artist: 'Altın Gün', name: 'Goca Dünya', likes: 8, audio: 'audio.mp3' },
+    { id: randomId(), category: 'Rap', artist: 'Altın Gün', name: 'Goca Dünya', likes: 8, audio: 'audio.mp3' },
 ]
 
 export const TracksList = () => (

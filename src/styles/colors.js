@@ -6,5 +6,6 @@ export const muiTheme = createMuiTheme({
         lightGray: '#dedede',
         dark: '#545454',
         black: '#000',
+        white: '#fff',
     },
 })

@@ -3,6 +3,7 @@ import { makeStyles } from '@material-ui/core/styles'
 export const useStyles = makeStyles(theme => ({
     card: {
         padding: 30,
+        overflow: 'hidden',
     },
     iconButton: {
         color: theme.palette.secondary.main,
