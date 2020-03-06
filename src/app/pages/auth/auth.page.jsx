@@ -1,8 +1,8 @@
 import React from 'react'
 import { Grid, Container, Box } from '@material-ui/core'
 
+import { AuthForm } from 'app/components'
 import { useStyles } from './styles'
-import { LoginForm } from '../../components'
 
 export const AuthPage = () => {
     const classes = useStyles()
@@ -12,7 +12,7 @@ export const AuthPage = () => {
             <Container maxWidth='md'>
                 <Box className={classes.wrapper}>
                     <Grid item xs={11} sm={6}>
-                        <LoginForm />
+                        <AuthForm />
                     </Grid>
                 </Box>
             </Container>

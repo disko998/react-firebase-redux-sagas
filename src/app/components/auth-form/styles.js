@@ -13,6 +13,9 @@ export const useStyles = makeStyles(theme => ({
         marginTop: 10,
         marginBottom: 10,
     },
+    form: {
+        width: '100%',
+    },
 }))
 
 export const Title = withStyles({

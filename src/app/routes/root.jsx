@@ -1,18 +1,32 @@
 import React from 'react'
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom'
 
-import { MainPage, AuthPage } from '../pages'
+import { MainPage, AuthPage } from 'app/pages'
 import { withSpinner } from 'app/components'
+import { selectCurrentUser } from 'lib/user/selector'
+import { connect } from 'react-redux'
 
 export function RootStackComponent({ user }) {
     return (
         <BrowserRouter>
             <Switch>
-                <Route exact path='/' render={() => (user ? <MainPage /> : <Redirect to='/login' />)}></Route>
-                <Route exact path='/login' render={() => (user ? <Redirect to='/' /> : <AuthPage />)}></Route>
+                <Route
+                    exact
+                    path='/'
+                    render={() => (user ? <MainPage /> : <Redirect to='/login' />)}
+                />
+                <Route
+                    exact
+                    path='/login'
+                    render={() => (user ? <Redirect to='/' /> : <AuthPage />)}
+                />
             </Switch>
         </BrowserRouter>
     )
 }
 
-export const RootStack = withSpinner(RootStackComponent)
+const mapStateToProps = state => ({
+    user: selectCurrentUser(state),
+})
+
+export const RootStack = withSpinner(connect(mapStateToProps)(RootStackComponent))

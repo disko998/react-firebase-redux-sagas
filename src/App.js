@@ -1,21 +1,19 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { ThemeProvider } from '@material-ui/core/styles'
+import { Provider as ReduxProvider } from 'react-redux'
 
-import { muiTheme } from './styles'
+import { configureStore } from './lib/store'
 import { RootStack } from './app/routes'
+import { muiTheme } from './styles'
 import './App.css'
 
 function App() {
-    const [loading, setLoading] = useState(true)
-
-    setTimeout(() => {
-        setLoading(false)
-    }, 0)
-
     return (
-        <ThemeProvider theme={muiTheme}>
-            <RootStack loading={loading} />
-        </ThemeProvider>
+        <ReduxProvider store={configureStore()}>
+            <ThemeProvider theme={muiTheme}>
+                <RootStack loading={false} />
+            </ThemeProvider>
+        </ReduxProvider>
     )
 }
 
