@@ -3,14 +3,15 @@ import { Box, Button } from '@material-ui/core'
 import LockOpenIcon from '@material-ui/icons/LockOpen'
 import AssignmentIndIcon from '@material-ui/icons/AssignmentInd'
 
-import { TextInput } from '../text-input'
+import { TextInput } from 'app/components/text-input'
 import { useStyles, Title } from './styles'
 import { connect } from 'react-redux'
 import { loginUser, registerUser } from 'lib/user/action'
+import { selectErrorMessage } from 'lib/user/selector'
 
-export const AuthFormComponent = ({ registerUser, loginUser }) => {
+export const AuthFormComponent = ({ registerUser, loginUser, authError }) => {
     const [showPassword, setShowPassword] = useState(false)
-    const [userCredentials, setUserCredentials] = useState({ username: '', password: '' })
+    const [userCredentials, setUserCredentials] = useState({ email: '', password: '' })
 
     const classes = useStyles()
 
@@ -30,9 +31,15 @@ export const AuthFormComponent = ({ registerUser, loginUser }) => {
         <Box boxShadow={3} className={classes.formWrapper}>
             <form className={classes.form}>
                 <Title variant='h4'>Login</Title>
-                <TextInput label='Username' id='username' onChange={onTextChange} />
                 <TextInput
-                    label='Password'
+                    error={Boolean(authError)}
+                    label={'Email'}
+                    id='email'
+                    onChange={onTextChange}
+                />
+                <TextInput
+                    error={Boolean(authError)}
+                    label={'Password'}
                     id='password'
                     secure={!showPassword}
                     onIconPress={toggleShowPass}
@@ -65,9 +72,13 @@ export const AuthFormComponent = ({ registerUser, loginUser }) => {
     )
 }
 
+const mapStateToProps = state => ({
+    authError: selectErrorMessage(state),
+})
+
 const mapDispatchToProps = dispatch => ({
     loginUser: credentials => dispatch(loginUser(credentials)),
     registerUser: credentials => dispatch(registerUser(credentials)),
 })
 
-export const AuthForm = connect(null, mapDispatchToProps)(AuthFormComponent)
+export const AuthForm = connect(mapStateToProps, mapDispatchToProps)(AuthFormComponent)

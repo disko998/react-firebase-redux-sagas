@@ -6,4 +6,8 @@ export const useStyles = makeStyles(theme => ({
         marginTop: 10,
         marginBottom: 10,
     },
+    label: error => ({
+        color: error ? '#f44336' : '',
+        textTransform: 'capitalize',
+    }),
 }))

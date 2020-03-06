@@ -8,6 +8,7 @@ import {
 
 export function* loginUser(action) {
     try {
+        throw Error('Incorrect entry.')
         yield put(loginUserSuccess(action.payload))
     } catch (e) {
         yield put(loginUserFailure(e.message))
