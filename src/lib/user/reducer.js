@@ -34,6 +34,12 @@ export const userReducer = (state = initialState, action) => {
         case UserActionTypes.REGISTER_USER_FAILURE:
             return { ...state, loading: false, errorMessage: action.payload }
 
+        case UserActionTypes.LOGOUT_USER_SUCCESS:
+            return { ...state, currentUser: null }
+
+        case UserActionTypes.REGISTER_USER_FAILURE:
+            return { ...state, errorMessage: action.payload }
+
         default:
             return state
     }

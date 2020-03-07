@@ -1,12 +1,17 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom'
 
 import { MainPage, AuthPage } from 'app/pages'
 import { withSpinner } from 'app/components'
 import { selectCurrentUser } from 'lib/user/selector'
 import { connect } from 'react-redux'
+import { checkUserSession } from 'lib/user/action'
 
-export function RootStackComponent({ user }) {
+export function RootStackComponent({ user, checkUserSession }) {
+    useEffect(() => {
+        checkUserSession()
+    }, [checkUserSession])
+
     return (
         <BrowserRouter>
             <Switch>
@@ -29,4 +34,10 @@ const mapStateToProps = state => ({
     user: selectCurrentUser(state),
 })
 
-export const RootStack = withSpinner(connect(mapStateToProps)(RootStackComponent))
+const mapDispatchToProps = dispatch => ({
+    checkUserSession: () => dispatch(checkUserSession()),
+})
+
+export const RootStack = withSpinner(
+    connect(mapStateToProps, mapDispatchToProps)(RootStackComponent),
+)

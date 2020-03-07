@@ -1,7 +1,7 @@
 import React from 'react'
-import { IconButton, Typography, Toolbar, AppBar, Container, Button } from '@material-ui/core'
-import AccountCircleIcon from '@material-ui/icons/AccountCircle'
+import { Typography, Toolbar, AppBar, Container } from '@material-ui/core'
 
+import { UserMenu } from 'app/components'
 import { useStyles } from './styles'
 
 export function Navbar() {
@@ -15,9 +15,7 @@ export function Navbar() {
                         <Typography variant='h6' className={classes.title}>
                             Audito
                         </Typography>
-                        <IconButton onClick={() => console.log('Person click')} className={classes.userButton}>
-                            <AccountCircleIcon />
-                        </IconButton>
+                        <UserMenu />
                     </Toolbar>
                 </Container>
             </AppBar>
