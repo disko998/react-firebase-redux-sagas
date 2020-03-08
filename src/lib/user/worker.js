@@ -41,8 +41,9 @@ export function* logoutUser(action) {
 export function* getUser(action) {
     try {
         const user = yield checkUsersSession()
+        if (!user) return
         yield put(loginUserSuccess(user))
     } catch (e) {
-        yield put(loginUserFailure(e.message))
+        yield put(loginUserSuccess(null))
     }
 }
