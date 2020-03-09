@@ -20,7 +20,8 @@ export const AuthFormComponent = ({ registerUser, loginUser, authError }) => {
         const { value, id } = e.target
         setUserCredentials({ ...userCredentials, [id]: value })
     }
-    const onLogin = () => {
+    const onLogin = e => {
+        e.preventDefault()
         loginUser(userCredentials)
     }
     const onRegister = () => {
@@ -29,15 +30,17 @@ export const AuthFormComponent = ({ registerUser, loginUser, authError }) => {
 
     return (
         <Box boxShadow={3} className={classes.formWrapper}>
-            <form className={classes.form}>
+            <form className={classes.form} onSubmit={onLogin}>
                 <Title variant='h4'>Login</Title>
                 <TextInput
+                    value={userCredentials.email}
                     error={Boolean(authError)}
                     label={'Email'}
                     id='email'
                     onChange={onTextChange}
                 />
                 <TextInput
+                    value={userCredentials.password}
                     error={Boolean(authError)}
                     label={'Password'}
                     id='password'

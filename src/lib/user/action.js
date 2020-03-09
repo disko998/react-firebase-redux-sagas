@@ -6,6 +6,7 @@ export const UserActionTypes = {
     REGISTER_USER_SUCCESS: 'REGISTER_USER_SUCCESS',
     REGISTER_USER_FAILURE: 'REGISTER_USER_FAILURE',
     CHECK_USER_SESSION: 'CHECK_USER_SESSION',
+    CHECK_USER_SUCCESS: 'CHECK_USER_SUCCESS',
     LOGOUT_USER: 'LOGOUT_USER',
     LOGOUT_USER_SUCCESS: 'LOGOUT_USER_SUCCESS',
     LOGOUT_USER_FAILURE: 'LOGOUT_USER_FAILURE',
@@ -56,4 +57,8 @@ export const logoutUserSuccess = () => ({
 export const logoutUserFailure = errorMessage => ({
     type: UserActionTypes.LOGOUT_USER_FAILURE,
     payload: errorMessage,
+})
+
+export const checkUserSessionSuccess = () => ({
+    type: UserActionTypes.CHECK_USER_SUCCESS,
 })

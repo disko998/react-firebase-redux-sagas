@@ -1,8 +1,8 @@
 import { UserActionTypes } from './action'
 
 const initialState = {
-    currentUser: null,
-    loading: false,
+    currentUser: undefined,
+    loading: true,
     errorMessage: '',
 }
 
@@ -23,14 +23,6 @@ export const userReducer = (state = initialState, action) => {
         case UserActionTypes.LOGIN_USER_FAILURE:
             return { ...state, loading: false, errorMessage: action.payload }
 
-        case UserActionTypes.REGISTER_USER_SUCCESS:
-            return {
-                ...state,
-                currentUser: action.payload,
-                loading: false,
-                errorMessage: '',
-            }
-
         case UserActionTypes.REGISTER_USER_FAILURE:
             return { ...state, loading: false, errorMessage: action.payload }
 
@@ -39,6 +31,8 @@ export const userReducer = (state = initialState, action) => {
 
         case UserActionTypes.REGISTER_USER_FAILURE:
             return { ...state, errorMessage: action.payload }
+        case UserActionTypes.CHECK_USER_SUCCESS:
+            return { ...state, loading: false }
 
         default:
             return state

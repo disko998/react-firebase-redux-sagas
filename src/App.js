@@ -11,7 +11,7 @@ function App() {
     return (
         <ReduxProvider store={configureStore()}>
             <ThemeProvider theme={muiTheme}>
-                <RootStack loading={false} />
+                <RootStack />
             </ThemeProvider>
         </ReduxProvider>
     )

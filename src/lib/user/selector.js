@@ -11,3 +11,5 @@ export const selectErrorMessage = createSelector(
     selectUserFeature,
     user => user.errorMessage,
 )
+
+export const selectLoading = createSelector(selectUserFeature, user => user.loading)
