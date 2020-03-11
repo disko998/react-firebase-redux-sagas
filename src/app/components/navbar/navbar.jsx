@@ -1,10 +1,12 @@
 import React from 'react'
 import { Typography, Toolbar, AppBar, Container } from '@material-ui/core'
+import { connect } from 'react-redux'
 
 import { UserMenu } from 'app/components'
 import { useStyles } from './styles'
+import { selectCurrentUser } from 'lib/user/selector'
 
-export function Navbar() {
+export function NavbarComponent({ user }) {
     const classes = useStyles()
 
     return (
@@ -13,7 +15,7 @@ export function Navbar() {
                 <Container maxWidth='md'>
                     <Toolbar className={classes.toolbar}>
                         <Typography variant='h6' className={classes.title}>
-                            Audito
+                            {user.displayName}
                         </Typography>
                         <UserMenu />
                     </Toolbar>
@@ -22,3 +24,9 @@ export function Navbar() {
         </div>
     )
 }
+
+const mapStateToProps = state => ({
+    user: selectCurrentUser(state),
+})
+
+export const Navbar = connect(mapStateToProps)(NavbarComponent)

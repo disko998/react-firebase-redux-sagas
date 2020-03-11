@@ -4,6 +4,6 @@ export const useStyles = makeStyles(theme => ({
     fab: {
         position: 'sticky',
         bottom: theme.spacing(3),
-        left: '100%',
+        left: '95%',
     },
 }))

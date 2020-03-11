@@ -1,17 +1,23 @@
 import React from 'react'
 import { Container } from '@material-ui/core'
 
-import { Navbar, SearchBar, TracksList, FabAdd } from '../../components'
+import { Navbar, SearchBar, JokesList, FabAdd } from 'app/components'
+import { connect } from 'react-redux'
+import { uploadJoke } from 'lib/jokes'
 
-export const MainPageComponent = () => (
+export const MainPageComponent = ({ uploadJoke }) => (
     <div>
         <Navbar />
         <Container maxWidth='md'>
             <SearchBar />
-            <TracksList />
-            <FabAdd />
+            <JokesList />
         </Container>
+        <FabAdd onClick={uploadJoke} />
     </div>
 )
 
-export const MainPage = MainPageComponent
+const dispatchToProps = dispatch => ({
+    uploadJoke: () => dispatch(uploadJoke()),
+})
+
+export const MainPage = connect(null, dispatchToProps)(MainPageComponent)

@@ -7,7 +7,7 @@ import PlayArrowIcon from '@material-ui/icons/PlayArrow'
 
 import { useStyles, PrettoSlider } from './styles'
 
-export const AudioPlayer = () => {
+export const AudioPlayer = ({ audio }) => {
     const classes = useStyles()
 
     return (
@@ -15,7 +15,11 @@ export const AudioPlayer = () => {
             <IconButton className={classes.iconButton} edge='start' aria-label='search'>
                 <PlayArrowIcon />
             </IconButton>
-            <PrettoSlider value={30} onChange={() => {}} aria-labelledby='continuous-slider' />
+            <PrettoSlider
+                value={30}
+                onChange={() => {}}
+                aria-labelledby='continuous-slider'
+            />
             <PrettoSlider
                 value={30}
                 onChange={() => {}}

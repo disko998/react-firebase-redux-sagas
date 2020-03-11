@@ -50,6 +50,7 @@ export const AuthFormComponent = ({ registerUser, loginUser, authError }) => {
                 />
                 <Box mt={3}>
                     <Button
+                        type='submit'
                         fullWidth
                         variant='contained'
                         color='primary'

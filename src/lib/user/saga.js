@@ -7,7 +7,7 @@ import {
     getUserSession,
     logoutUser,
     loginAfterRegistration,
-} from './workers'
+} from './worker'
 
 function* watchLoginUser() {
     yield takeLatest(UserActionTypes.LOGIN_USER, loginUser)

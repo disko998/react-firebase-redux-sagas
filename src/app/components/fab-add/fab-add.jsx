@@ -4,11 +4,11 @@ import AddIcon from '@material-ui/icons/Add'
 
 import { useStyles } from './styles'
 
-export const FabAdd = () => {
+export const FabAdd = ({ onClick }) => {
     const classes = useStyles()
 
     return (
-        <Fab aria-label='Add' className={classes.fab} color='primary'>
+        <Fab onClick={onClick} aria-label='Add' className={classes.fab} color='primary'>
             <AddIcon />
         </Fab>
     )

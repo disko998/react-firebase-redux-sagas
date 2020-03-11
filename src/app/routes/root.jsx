@@ -1,13 +1,12 @@
 import React, { useEffect } from 'react'
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom'
 
-import { MainPage, AuthPage } from 'app/pages'
-import { LoadingPage } from 'app/pages'
+import { MainPage, AuthPage, LoadingPage, UploadPage } from 'app/pages'
 import { selectLoading, selectCurrentUser } from 'lib/user/selector'
 import { connect } from 'react-redux'
 import { checkUserSession } from 'lib/user/action'
 
-export function RootStackComponent({ userLoading, user, checkUserSession }) {
+function RootStackComponent({ userLoading, user, checkUserSession }) {
     useEffect(() => {
         checkUserSession()
     }, [checkUserSession])
@@ -26,6 +25,12 @@ export function RootStackComponent({ userLoading, user, checkUserSession }) {
                     exact
                     path='/login'
                     render={() => (user ? <Redirect to='/' /> : <AuthPage />)}
+                />
+
+                <Route
+                    exact
+                    path='/upload'
+                    render={() => (user ? <UploadPage /> : <Redirect to='/login' />)}
                 />
             </Switch>
         </BrowserRouter>

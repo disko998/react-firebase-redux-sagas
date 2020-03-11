@@ -14,7 +14,7 @@ export function* getAuthUser(user) {
     try {
         const userRef = yield call(getUserRef, user)
         const userSnapshot = yield userRef.get()
-        yield put(loginUserSuccess(userSnapshot.data()))
+        yield put(loginUserSuccess({ id: userRef.id, ...userSnapshot.data() }))
     } catch (e) {
         yield put(loginUserFailure(e.message))
     }
