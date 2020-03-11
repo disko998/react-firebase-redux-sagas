@@ -46,12 +46,12 @@ export const recordUserJoke = async user => {
     })
 
     const jokes = await docRef.get()
-    const data = jokes.data()
+    const jokeData = jokes.data()
 
     return {
-        ...data,
+        ...jokeData,
         id: docRef.id,
-        author: { id: data.author, name: user.displayName },
+        author: { id: jokeData.author, name: user.displayName },
     }
 }
 

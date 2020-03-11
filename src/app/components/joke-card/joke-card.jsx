@@ -1,6 +1,7 @@
 import React from 'react'
 import { Box, IconButton, Typography } from '@material-ui/core'
-import ThumbUpIcon from '@material-ui/icons/ThumbUp'
+import EmojiEmotionsIcon from '@material-ui/icons/EmojiEmotions'
+import EmojiEmotionsOutlinedIcon from '@material-ui/icons/EmojiEmotionsOutlined'
 
 import { AudioPlayer } from '../audio-player'
 import { useStyles } from './styles'
@@ -23,7 +24,7 @@ export const JokeCard = ({ joke }) => {
                 aria-label='like'
             >
                 <span className={classes.likes}>{joke.likes}</span>
-                <ThumbUpIcon />
+                <EmojiEmotionsOutlinedIcon />
             </IconButton>
             <Box
                 display='flex'
