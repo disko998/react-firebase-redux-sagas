@@ -1,5 +1,4 @@
 import firebase from './config'
-import { randomId } from 'lib/utils'
 
 export const auth = firebase.auth()
 export const db = firebase.firestore()
@@ -13,7 +12,7 @@ export const checkUsersSession = () => {
     })
 }
 
-export const getUserRef = async user => {
+export const getAuthUserRef = async user => {
     const { uid, email, emailVerified } = user
 
     const userRef = db.collection('users').doc(uid)
@@ -55,35 +54,7 @@ export const recordUserJoke = async user => {
     }
 }
 
-export const listenForJokes = () => {
-    return new Promise((resolve, reject) => {
-        const unsubscirbeListener = db.collection('jokes').onSnapshot(
-            snapshot => {
-                console.log('querySnapshot', snapshot.docChanges())
-                const data = snapshot.docChanges().map(item => {
-                    const joke = item.doc.data()
-                    console.log('joke', joke)
-                    return joke
-                    // const user = await getUserById(joke.author)
-
-                    // if (!user) {
-                    //     return { ...joke, author: { id: randomId(), name: 'unknown' } }
-                    // }
-
-                    // return {
-                    //     ...joke,
-                    //     author: { id: joke.author, name: user.displayName },
-                    // }
-                })
-
-                resolve(Promise.all(data))
-            },
-            err => reject(err),
-        )
-    })
-}
-
-const getUserById = async id => {
+const getUserDataById = async id => {
     const userRef = db.doc(`users/${id}`)
     const userSnapshot = await userRef.get()
 

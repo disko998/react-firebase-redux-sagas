@@ -1,7 +1,7 @@
 import { call, put, select, fork } from 'redux-saga/effects'
 import { channel } from 'redux-saga'
 
-import { recordUserJoke, listenForJokes } from 'lib/firebase'
+import { recordUserJoke, db } from 'lib/firebase'
 import { selectCurrentUser } from 'lib/user/selector'
 import {
     uploadJokeSuccess,
@@ -14,20 +14,33 @@ import {
 
 let RECORDER
 let AUDIO_STREAM
+let unsubscribeJokesListener
 
 export const channelAudio = channel()
+export const channelJokes = channel()
 
-export function* uploadUserJoke(action) {
+export function* subscribeToJokesWorker(action) {
     try {
-        const user = yield select(selectCurrentUser)
-        const joke = yield call(recordUserJoke, user)
-        yield put(uploadJokeSuccess(joke))
+        unsubscribeJokesListener = db.collection('jokes').onSnapshot(
+            snapshot => {
+                const data = snapshot.docChanges().map(item => {
+                    const joke = item.doc.data()
+                    return { ...joke, id: item.doc.id }
+                })
+                channelJokes.put(fetchJokesSuccess(data))
+            },
+            err => channelJokes.put(fetchJokesFailure(err.message)),
+        )
     } catch (e) {
-        yield put(uploadJokeFailure(e.message))
+        yield put(fetchJokesFailure(e.message))
     }
 }
 
-export function* startRecordingAudio(action) {
+export function* unsubscribeFromJokesWorker(action) {
+    unsubscribeJokesListener()
+}
+
+export function* startRecordingAudioWorker(action) {
     try {
         if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
             AUDIO_STREAM = yield navigator.mediaDevices.getUserMedia({ audio: true })
@@ -50,7 +63,7 @@ export function* startRecordingAudio(action) {
     }
 }
 
-export function* stopRecordingAudio(action) {
+export function* stopRecordingAudioWorker(action) {
     try {
         RECORDER.stop()
         AUDIO_STREAM.getTracks().forEach(track => track.stop())
@@ -59,12 +72,13 @@ export function* stopRecordingAudio(action) {
     }
 }
 
-// TODO: jokes collection listener
-export function* getJokes(action) {
+// TODO: refactor this worker
+export function* uploadJokeWorker(action) {
     try {
-        const jokes = yield fork(listenForJokes)
-        yield put(fetchJokesSuccess(jokes))
+        const user = yield select(selectCurrentUser)
+        const joke = yield call(recordUserJoke, user)
+        yield put(uploadJokeSuccess(joke))
     } catch (e) {
-        yield put(fetchJokesFailure(e.message))
+        yield put(uploadJokeFailure(e.message))
     }
 }

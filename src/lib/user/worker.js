@@ -1,5 +1,5 @@
 import { call, put } from 'redux-saga/effects'
-import { auth, checkUsersSession, getUserRef } from 'lib/firebase'
+import { auth, checkUsersSession, getAuthUserRef } from 'lib/firebase'
 import {
     loginUserSuccess,
     loginUserFailure,
@@ -7,12 +7,12 @@ import {
     registerUserFailure,
     logoutUserSuccess,
     logoutUserFailure,
-    checkUserSessionSuccess,
+    checkUserSessionFinish,
 } from './action'
 
-export function* getAuthUser(user) {
+export function* loginAuthUser(authUser) {
     try {
-        const userRef = yield call(getUserRef, user)
+        const userRef = yield call(getAuthUserRef, authUser)
         const userSnapshot = yield userRef.get()
         yield put(loginUserSuccess({ id: userRef.id, ...userSnapshot.data() }))
     } catch (e) {
@@ -24,14 +24,14 @@ export function* loginUser(action) {
     const { email, password } = action.payload
     try {
         const authUser = yield auth.signInWithEmailAndPassword(email, password)
-        yield getAuthUser(authUser.user)
+        yield loginAuthUser(authUser.user)
     } catch (e) {
         yield put(loginUserFailure(e.message))
     }
 }
 
 export function* loginAfterRegistration({ payload }) {
-    yield getAuthUser(payload)
+    yield loginAuthUser(payload)
 }
 
 export function* registerUser(action) {
@@ -55,13 +55,13 @@ export function* logoutUser() {
 
 export function* getUserSession() {
     try {
-        const authUser = yield checkUsersSession()
+        const authUser = yield call(checkUsersSession)
         if (!authUser) {
-            yield put(checkUserSessionSuccess())
+            yield put(checkUserSessionFinish())
             return
         }
-        yield getAuthUser(authUser)
+        yield loginAuthUser(authUser)
     } catch (e) {
-        yield put(checkUserSessionSuccess())
+        yield put(checkUserSessionFinish())
     }
 }

@@ -2,42 +2,56 @@ import { call, takeEvery, takeLatest, all, take, put } from 'redux-saga/effects'
 import { JokesActionType } from './action'
 
 import {
-    uploadUserJoke,
-    getJokes,
-    startRecordingAudio,
-    stopRecordingAudio,
+    uploadJokeWorker,
+    subscribeToJokesWorker,
+    unsubscribeFromJokesWorker,
+    startRecordingAudioWorker,
+    stopRecordingAudioWorker,
     channelAudio,
+    channelJokes,
 } from './worker'
 
 function* watchUploadJoke() {
-    yield takeLatest(JokesActionType.UPLOAD_JOKE, uploadUserJoke)
+    yield takeLatest(JokesActionType.UPLOAD_JOKE, uploadJokeWorker)
 }
 
-function* watchFetchJokes() {
-    yield takeEvery(JokesActionType.FETCH_JOKES, getJokes)
+function* watchSubscribeJokesChannel() {
+    yield takeEvery(JokesActionType.SUBSCRIBE_JOKES_CHANNEL, subscribeToJokesWorker)
+}
+
+function* watchUnsubscribeJokesChannel() {
+    yield takeEvery(JokesActionType.UNSUBSCRIBE_JOKES_CHANNEL, unsubscribeFromJokesWorker)
 }
 
 function* watchStartRecordingAudio() {
-    yield takeEvery(JokesActionType.RECORD_AUDIO_START, startRecordingAudio)
+    yield takeEvery(JokesActionType.RECORD_AUDIO_START, startRecordingAudioWorker)
 }
 
 function* watchStopRecordingAudio() {
-    yield takeEvery(JokesActionType.RECORD_AUDIO_STOP, stopRecordingAudio)
+    yield takeEvery(JokesActionType.RECORD_AUDIO_STOP, stopRecordingAudioWorker)
 }
 
-export function* watchRedirectChannel() {
+export function* watchAudioChannel() {
     while (true) {
         const action = yield take(channelAudio)
         yield put(action)
     }
 }
 
+export function* watchJokesChannel() {
+    while (true) {
+        const action = yield take(channelJokes)
+        yield put(action)
+    }
+}
 export default function* jokesSagas() {
     yield all([
         call(watchUploadJoke),
-        call(watchFetchJokes),
+        call(watchSubscribeJokesChannel),
+        call(watchUnsubscribeJokesChannel),
         call(watchStartRecordingAudio),
         call(watchStopRecordingAudio),
-        call(watchRedirectChannel),
+        call(watchAudioChannel),
+        call(watchJokesChannel),
     ])
 }

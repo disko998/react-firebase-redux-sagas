@@ -2,7 +2,8 @@ export const JokesActionType = {
     UPLOAD_JOKE: 'UPLOAD_JOKE',
     UPLOAD_JOKE_SUCCESS: 'UPLOAD_JOKE_SUCCESS',
     UPLOAD_JOKE_fAILURE: 'UPLOAD_JOKE_fAILURE',
-    FETCH_JOKES: 'FETCH_JOKES',
+    SUBSCRIBE_JOKES_CHANNEL: 'SUBSCRIBE_JOKES_CHANNEL',
+    UNSUBSCRIBE_JOKES_CHANNEL: 'UNSUBSCRIBE_JOKES_CHANNEL',
     FETCH_JOKES_SUCCESS: 'FETCH_JOKES_SUCCESS',
     FETCH_JOKES_FAILURE: 'FETCH_JOKES_FAILURE',
     RECORD_AUDIO_START: 'RECORD_AUDIO_START',
@@ -11,6 +12,7 @@ export const JokesActionType = {
     RECORD_AUDIO_FAILURE: 'RECORD_AUDIO_FAILURE',
 }
 
+// UPLOAD JOKE
 export const uploadJoke = () => ({
     type: JokesActionType.UPLOAD_JOKE,
 })
@@ -25,8 +27,13 @@ export const uploadJokeFailure = errorMessage => ({
     payload: errorMessage,
 })
 
-export const fetchJokes = () => ({
-    type: JokesActionType.FETCH_JOKES,
+// JOKES CHANNEL
+export const subscribeJokesChannel = () => ({
+    type: JokesActionType.SUBSCRIBE_JOKES_CHANNEL,
+})
+
+export const unsubscribeJokesChannel = () => ({
+    type: JokesActionType.UNSUBSCRIBE_JOKES_CHANNEL,
 })
 
 export const fetchJokesSuccess = jokes => ({
@@ -39,6 +46,7 @@ export const fetchJokesFailure = errorMessage => ({
     payload: errorMessage,
 })
 
+// AUDIO RECORDING
 export const startRecordingAudio = () => ({
     type: JokesActionType.RECORD_AUDIO_START,
 })

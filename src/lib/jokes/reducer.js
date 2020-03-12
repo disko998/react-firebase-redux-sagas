@@ -17,12 +17,18 @@ export const jokesReducer = (state = initialState, action) => {
         case JokesActionType.RECORD_AUDIO_START:
             return {
                 ...state,
-                audioRecord: { file: null, isRecording: true, errorMessage: '' },
+                audioRecord: {
+                    ...state.audioRecord,
+                    file: null,
+                    isRecording: true,
+                    errorMessage: '',
+                },
             }
         case JokesActionType.RECORD_AUDIO_SUCCESS:
             return {
                 ...state,
                 audioRecord: {
+                    ...state.audioRecord,
                     file: action.payload,
                     isRecording: false,
                     errorMessage: '',
@@ -37,6 +43,7 @@ export const jokesReducer = (state = initialState, action) => {
             return {
                 ...state,
                 audioRecord: {
+                    ...state.audioRecord,
                     file: null,
                     isRecording: false,
                     errorMessage: action.payload,

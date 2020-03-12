@@ -1,4 +1,4 @@
 import firebase from './config'
 
-export * from './utils'
+export * from './firebase.utils'
 export { firebase }
