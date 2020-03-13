@@ -5,9 +5,6 @@ import {
     uploadJokeWorker,
     subscribeToJokesWorker,
     unsubscribeFromJokesWorker,
-    startRecordingAudioWorker,
-    stopRecordingAudioWorker,
-    channelAudio,
     channelJokes,
 } from './worker'
 
@@ -26,21 +23,6 @@ function* watchUnsubscribeJokesChannel() {
     )
 }
 
-function* watchStartRecordingAudio() {
-    yield takeLatest(JokesActionType.RECORD_AUDIO_START, startRecordingAudioWorker)
-}
-
-function* watchStopRecordingAudio() {
-    yield takeLatest(JokesActionType.RECORD_AUDIO_STOP, stopRecordingAudioWorker)
-}
-
-export function* watchAudioChannel() {
-    while (true) {
-        const action = yield take(channelAudio)
-        yield put(action)
-    }
-}
-
 export function* watchJokesChannel() {
     while (true) {
         const action = yield take(channelJokes)
@@ -52,9 +34,6 @@ export default function* jokesSagas() {
         call(watchUploadJoke),
         call(watchSubscribeJokesChannel),
         call(watchUnsubscribeJokesChannel),
-        call(watchStartRecordingAudio),
-        call(watchStopRecordingAudio),
-        call(watchAudioChannel),
         call(watchJokesChannel),
     ])
 }

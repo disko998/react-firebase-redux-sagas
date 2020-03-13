@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 
 import { useStyles } from './styles'
 import { UploadJokeForm } from 'app/components'
-import { clearAudioRecord, selectAudioFile } from 'lib/jokes'
+import { clearAudioRecord, selectAudioFile } from 'lib/recorder'
 
 export const UploadJokeModalComponent = ({ audioFile, clearAudioRecord }) => {
     const classes = useStyles()

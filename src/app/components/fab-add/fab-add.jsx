@@ -5,8 +5,11 @@ import MicOutlinedIcon from '@material-ui/icons/MicOutlined'
 import MicOffIcon from '@material-ui/icons/MicOff'
 
 import { useStyles } from './styles'
-import { startRecordingAudio, stopRecordingAudio } from 'lib/jokes/action'
-import { selectAudioRecord } from 'lib/jokes/selector'
+import {
+    startRecordingAudio,
+    stopRecordingAudio,
+    selectRecorderFeature,
+} from 'lib/recorder'
 
 export const RecordJokeButtonComponent = ({
     startRecordingAudio,
@@ -34,7 +37,7 @@ export const RecordJokeButtonComponent = ({
 }
 
 const mapStateToProps = state => ({
-    audio: selectAudioRecord(state),
+    audio: selectRecorderFeature(state),
 })
 
 const dispatchToProps = dispatch => ({

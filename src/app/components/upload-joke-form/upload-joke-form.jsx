@@ -5,7 +5,8 @@ import { connect } from 'react-redux'
 
 import { useStyles } from './styles'
 import { AudioPlayer, TextInput } from 'app/components'
-import { uploadJoke, selectAudioRecord } from 'lib/jokes'
+import { uploadJoke } from 'lib/jokes'
+import { selectRecorderFeature } from 'lib/recorder'
 
 const UploadJokeFormComponent = ({ audio, uploadJoke }) => {
     const [jokeName, setJokeName] = useState('')
@@ -47,7 +48,7 @@ const UploadJokeFormComponent = ({ audio, uploadJoke }) => {
 }
 
 const mapStateToProps = state => ({
-    audio: selectAudioRecord(state),
+    audio: selectRecorderFeature(state),
 })
 
 const dispatchToProps = dispatch => ({
