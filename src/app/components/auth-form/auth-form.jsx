@@ -33,6 +33,7 @@ export const AuthFormComponent = ({ registerUser, loginUser, authError }) => {
             <form className={classes.form} onSubmit={onLogin}>
                 <Title variant='h4'>Login</Title>
                 <TextInput
+                    required={true}
                     value={userCredentials.email}
                     error={Boolean(authError)}
                     label={'Email'}
@@ -40,6 +41,7 @@ export const AuthFormComponent = ({ registerUser, loginUser, authError }) => {
                     onChange={onTextChange}
                 />
                 <TextInput
+                    required={true}
                     value={userCredentials.password}
                     error={Boolean(authError)}
                     label={'Password'}

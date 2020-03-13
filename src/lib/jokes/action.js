@@ -10,11 +10,16 @@ export const JokesActionType = {
     RECORD_AUDIO_STOP: 'RECORD_AUDIO_STOP',
     RECORD_AUDIO_SUCCESS: 'RECORD_AUDIO_SUCCESS',
     RECORD_AUDIO_FAILURE: 'RECORD_AUDIO_FAILURE',
+    CLEAR_AUDIO_RECORD: 'CLEAR_AUDIO_RECORD',
 }
 
 // UPLOAD JOKE
-export const uploadJoke = () => ({
+export const uploadJoke = (name, audio) => ({
     type: JokesActionType.UPLOAD_JOKE,
+    payload: {
+        name,
+        audio,
+    },
 })
 
 export const uploadJokeSuccess = joke => ({
@@ -63,4 +68,8 @@ export const recordAudioSuccess = audio => ({
 export const recordAudioFailure = errorMessage => ({
     type: JokesActionType.RECORD_AUDIO_FAILURE,
     payload: errorMessage,
+})
+
+export const clearAudioRecord = () => ({
+    type: JokesActionType.CLEAR_AUDIO_RECORD,
 })

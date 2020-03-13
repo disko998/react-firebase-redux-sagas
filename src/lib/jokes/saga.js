@@ -20,15 +20,18 @@ function* watchSubscribeJokesChannel() {
 }
 
 function* watchUnsubscribeJokesChannel() {
-    yield takeEvery(JokesActionType.UNSUBSCRIBE_JOKES_CHANNEL, unsubscribeFromJokesWorker)
+    yield takeLatest(
+        JokesActionType.UNSUBSCRIBE_JOKES_CHANNEL,
+        unsubscribeFromJokesWorker,
+    )
 }
 
 function* watchStartRecordingAudio() {
-    yield takeEvery(JokesActionType.RECORD_AUDIO_START, startRecordingAudioWorker)
+    yield takeLatest(JokesActionType.RECORD_AUDIO_START, startRecordingAudioWorker)
 }
 
 function* watchStopRecordingAudio() {
-    yield takeEvery(JokesActionType.RECORD_AUDIO_STOP, stopRecordingAudioWorker)
+    yield takeLatest(JokesActionType.RECORD_AUDIO_STOP, stopRecordingAudioWorker)
 }
 
 export function* watchAudioChannel() {

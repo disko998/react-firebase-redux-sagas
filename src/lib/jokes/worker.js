@@ -1,7 +1,7 @@
-import { call, put, select, fork } from 'redux-saga/effects'
+import { call, put, select } from 'redux-saga/effects'
 import { channel } from 'redux-saga'
 
-import { recordUserJoke, db } from 'lib/firebase'
+import { recordUserJoke, db, saveAudioToStorage } from 'lib/firebase'
 import { selectCurrentUser } from 'lib/user/selector'
 import {
     uploadJokeSuccess,
@@ -72,11 +72,11 @@ export function* stopRecordingAudioWorker(action) {
     }
 }
 
-// TODO: refactor this worker
 export function* uploadJokeWorker(action) {
     try {
         const user = yield select(selectCurrentUser)
-        const joke = yield call(recordUserJoke, user)
+        const downloadURL = yield call(saveAudioToStorage, action.payload, user.id)
+        const joke = yield call(recordUserJoke, user, downloadURL, action.payload)
         yield put(uploadJokeSuccess(joke))
     } catch (e) {
         yield put(uploadJokeFailure(e.message))

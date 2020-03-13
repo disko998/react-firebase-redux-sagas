@@ -7,3 +7,7 @@ export const selectAudioRecord = createSelector(
     selectJokesFeature,
     jokes => jokes.audioRecord,
 )
+export const selectAudioFile = createSelector(
+    selectAudioRecord,
+    audioRecord => audioRecord.file,
+)

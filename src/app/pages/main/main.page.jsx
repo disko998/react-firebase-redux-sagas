@@ -1,7 +1,13 @@
 import React from 'react'
 import { Container } from '@material-ui/core'
 
-import { Navbar, SearchBar, JokesList, RecordJokeButton } from 'app/components'
+import {
+    Navbar,
+    SearchBar,
+    JokesList,
+    RecordJokeButton,
+    UploadJokeModal,
+} from 'app/components'
 
 export const MainPage = () => (
     <div>
@@ -11,5 +17,6 @@ export const MainPage = () => (
             <JokesList />
         </Container>
         <RecordJokeButton />
+        <UploadJokeModal />
     </div>
 )

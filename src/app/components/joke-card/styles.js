@@ -4,6 +4,9 @@ export const useStyles = makeStyles(theme => ({
     card: {
         padding: 30,
         overflow: 'hidden',
+        display: 'flex',
+        justifyContent: 'space-around',
+        alignItems: 'center',
     },
     iconButton: {
         color: theme.palette.secondary.main,
@@ -11,7 +14,6 @@ export const useStyles = makeStyles(theme => ({
     },
     likes: {
         marginTop: 4,
-        marginRight: 3,
         fontSize: 25,
         fontWeight: 500,
     },

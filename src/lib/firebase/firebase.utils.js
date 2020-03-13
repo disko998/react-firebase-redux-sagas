@@ -2,6 +2,7 @@ import firebase from './config'
 
 export const auth = firebase.auth()
 export const db = firebase.firestore()
+export const storageRef = firebase.storage().ref()
 
 export const checkUsersSession = () => {
     return new Promise((resolve, reject) => {
@@ -33,14 +34,25 @@ export const getAuthUserRef = async user => {
     return userRef
 }
 
-export const recordUserJoke = async user => {
+export const saveAudioToStorage = async (metadata, userId) => {
+    try {
+        const audioRef = storageRef.child(`jokes/${userId}/${metadata.name}.mp3`)
+        const snapshot = await audioRef.put(metadata.audio)
+
+        return snapshot.ref.getDownloadURL()
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+export const recordUserJoke = async (user, audioURL, metadata) => {
     const collectionRef = db.collection('jokes')
 
     const docRef = await collectionRef.add({
-        name: 'Test',
+        name: metadata.name,
         author: user.id,
         likes: 0,
-        audio: 'audio.mp3',
+        audio: audioURL,
         createdAt: new Date(),
     })
 

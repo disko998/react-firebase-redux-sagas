@@ -35,7 +35,7 @@ export const JokeCard = ({ joke }) => {
                 <Typography className={classes.title}>{joke.name}</Typography>
                 <Typography className={classes.category}>{joke.author.name}</Typography>
             </Box>
-            <AudioPlayer audio={joke.audio} />
+            <AudioPlayer src={joke.audio} />
         </Box>
     )
 }

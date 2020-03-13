@@ -14,6 +14,7 @@ export const jokesReducer = (state = initialState, action) => {
     switch (action.type) {
         case JokesActionType.FETCH_JOKES_SUCCESS:
             return { ...state, data: [...state.data, ...action.payload] }
+
         case JokesActionType.RECORD_AUDIO_START:
             return {
                 ...state,
@@ -24,6 +25,7 @@ export const jokesReducer = (state = initialState, action) => {
                     errorMessage: '',
                 },
             }
+
         case JokesActionType.RECORD_AUDIO_SUCCESS:
             return {
                 ...state,
@@ -34,11 +36,25 @@ export const jokesReducer = (state = initialState, action) => {
                     errorMessage: '',
                 },
             }
+
         case JokesActionType.RECORD_AUDIO_STOP:
             return {
                 ...state,
                 audioRecord: { ...state.audioRecord, isRecording: false },
             }
+
+        case JokesActionType.UPLOAD_JOKE_SUCCESS:
+        case JokesActionType.CLEAR_AUDIO_RECORD:
+            return {
+                ...state,
+                audioRecord: {
+                    ...state.audioRecord,
+                    file: null,
+                    isRecording: false,
+                    errorMessage: '',
+                },
+            }
+
         case JokesActionType.RECORD_AUDIO_FAILURE:
             return {
                 ...state,
