@@ -11,3 +11,7 @@ export function blobToFile(theBlob, fileName) {
     theBlob.name = fileName
     return theBlob
 }
+
+export function sortByDate(a, b) {
+    return new Date(b.createdAt.seconds) - new Date(a.createdAt.seconds)
+}

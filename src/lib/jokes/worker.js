@@ -10,22 +10,28 @@ import {
     fetchJokesFailure,
 } from './action'
 
+const JOKES_LIMIT = 5
+
 let unsubscribeJokesListener
 
 export const channelJokes = channel()
 
 export function* subscribeToJokesWorker(action) {
     try {
-        unsubscribeJokesListener = db.collection('jokes').onSnapshot(
-            snapshot => {
-                const data = snapshot.docChanges().map(item => {
-                    const joke = item.doc.data()
-                    return { ...joke, id: item.doc.id }
-                })
-                channelJokes.put(fetchJokesSuccess(data))
-            },
-            err => channelJokes.put(fetchJokesFailure(err.message)),
-        )
+        unsubscribeJokesListener = db
+            .collection('jokes')
+            .orderBy('createdAt', 'desc')
+            .limit(JOKES_LIMIT)
+            .onSnapshot(
+                snapshot => {
+                    const data = snapshot.docChanges().map(item => {
+                        const joke = item.doc.data()
+                        return { ...joke, id: item.doc.id }
+                    })
+                    channelJokes.put(fetchJokesSuccess(data))
+                },
+                err => channelJokes.put(fetchJokesFailure(err.message)),
+            )
     } catch (e) {
         yield put(fetchJokesFailure(e.message))
     }
