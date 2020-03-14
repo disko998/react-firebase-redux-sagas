@@ -43,6 +43,12 @@ export function* unsubscribeFromJokesWorker(action) {
 
 export function* uploadJokeWorker(action) {
     try {
+        const { name, audio } = action.payload
+
+        if (!name.length && audio.type === 'audio/mpeg-3') {
+            throw new Error('Please provide valid data')
+        }
+
         const user = yield select(selectCurrentUser)
         const downloadURL = yield call(saveAudioToStorage, action.payload, user.id)
         const joke = yield call(recordUserJoke, user, downloadURL, action.payload)

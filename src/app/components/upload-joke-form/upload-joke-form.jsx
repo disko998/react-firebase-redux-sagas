@@ -5,10 +5,10 @@ import { connect } from 'react-redux'
 
 import { useStyles } from './styles'
 import { AudioPlayer, TextInput } from 'app/components'
-import { uploadJoke } from 'lib/jokes'
+import { uploadJoke, selectUploadJokeError } from 'lib/jokes'
 import { selectRecorderFeature } from 'lib/recorder'
 
-const UploadJokeFormComponent = ({ audio, uploadJoke }) => {
+const UploadJokeFormComponent = ({ audio, uploadJoke, uploadJokeError }) => {
     const [jokeName, setJokeName] = useState('')
     const classes = useStyles()
 
@@ -18,23 +18,26 @@ const UploadJokeFormComponent = ({ audio, uploadJoke }) => {
         setJokeName(e.target.value)
     }
 
-    const onSubmit = () => {
+    const onSubmit = e => {
+        e.preventDefault()
         uploadJoke(jokeName, audio.file)
     }
 
     return (
         <Paper className={classes.card}>
-            <form className={classes.form}>
+            <form className={classes.form} onSubmit={onSubmit}>
                 <TextInput
-                    required={true}
+                    required
                     label='Joke Name'
                     value={jokeName}
                     onChange={onTextChange}
                     className={classes.jokeTitle}
+                    autoFocus={true}
+                    error={Boolean(uploadJokeError)}
                 />
                 <AudioPlayer src={audioURL} />
                 <Button
-                    onClick={onSubmit}
+                    type={'submit'}
                     variant='contained'
                     color='primary'
                     className={classes.uploadButton}
@@ -49,6 +52,7 @@ const UploadJokeFormComponent = ({ audio, uploadJoke }) => {
 
 const mapStateToProps = state => ({
     audio: selectRecorderFeature(state),
+    uploadJokeError: selectUploadJokeError(state),
 })
 
 const dispatchToProps = dispatch => ({

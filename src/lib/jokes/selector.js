@@ -7,3 +7,7 @@ export const selectIsUploading = createSelector(
     selectJokesFeature,
     jokes => jokes.uploading,
 )
+export const selectUploadJokeError = createSelector(
+    selectJokesFeature,
+    jokes => jokes.errorMessage,
+)

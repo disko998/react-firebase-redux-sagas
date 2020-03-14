@@ -20,7 +20,7 @@ export const RecorderButtonComponent = ({
     const [anchorEl, setAnchorEl] = React.useState(null)
     const classes = useStyles()
 
-    const handleRecordAudio = () => {
+    const handleRecordAudio = e => {
         audio.isRecording ? stopRecordingAudio() : startRecordingAudio()
     }
 
@@ -28,6 +28,7 @@ export const RecorderButtonComponent = ({
         <React.Fragment>
             <Recorder open={audio.isRecording} anchorEl={anchorEl} />
             <Fab
+                type={'button'}
                 ref={setAnchorEl}
                 onClick={handleRecordAudio}
                 aria-label='Add'
