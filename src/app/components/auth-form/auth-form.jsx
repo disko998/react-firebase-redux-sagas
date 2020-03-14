@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
+import { connect } from 'react-redux'
 import { Box, Button } from '@material-ui/core'
 import LockOpenIcon from '@material-ui/icons/LockOpen'
 import AssignmentIndIcon from '@material-ui/icons/AssignmentInd'
 
 import { TextInput } from 'app/components/text-input'
 import { useStyles, Title } from './styles'
-import { connect } from 'react-redux'
 import { loginUser, registerUser } from 'lib/user/action'
 import { selectErrorMessage } from 'lib/user/selector'
 

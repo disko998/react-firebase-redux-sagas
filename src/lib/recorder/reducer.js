@@ -5,6 +5,7 @@ const initialState = {
     file: null,
     isRecording: false,
     errorMessage: '',
+    recordingTime: 0,
 }
 
 export const recorderReducer = (state = initialState, action) => {
@@ -15,6 +16,7 @@ export const recorderReducer = (state = initialState, action) => {
                 file: null,
                 isRecording: true,
                 errorMessage: '',
+                recordingTime: 0,
             }
 
         case RecorderActionType.RECORD_AUDIO_SUCCESS:
@@ -23,12 +25,14 @@ export const recorderReducer = (state = initialState, action) => {
                 file: action.payload,
                 isRecording: false,
                 errorMessage: '',
+                recordingTime: 0,
             }
 
         case RecorderActionType.RECORD_AUDIO_STOP:
             return {
                 ...state,
                 isRecording: false,
+                recordingTime: 0,
             }
 
         case JokesActionType.UPLOAD_JOKE_SUCCESS:
@@ -38,6 +42,7 @@ export const recorderReducer = (state = initialState, action) => {
                 file: null,
                 isRecording: false,
                 errorMessage: '',
+                recordingTime: 0,
             }
 
         case RecorderActionType.RECORD_AUDIO_FAILURE:
@@ -46,6 +51,13 @@ export const recorderReducer = (state = initialState, action) => {
                 file: null,
                 isRecording: false,
                 errorMessage: action.payload,
+                recordingTime: 0,
+            }
+
+        case RecorderActionType.UPDATE_RECORDING_TIME:
+            return {
+                ...state,
+                recordingTime: ++state.recordingTime,
             }
 
         default:

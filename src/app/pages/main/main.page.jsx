@@ -5,7 +5,7 @@ import {
     Navbar,
     SearchBar,
     JokesList,
-    RecordJokeButton,
+    RecorderButton,
     UploadJokeModal,
 } from 'app/components'
 
@@ -16,7 +16,7 @@ export const MainPage = () => (
             <SearchBar />
             <JokesList />
         </Container>
-        <RecordJokeButton />
+        <RecorderButton />
         <UploadJokeModal />
     </div>
 )

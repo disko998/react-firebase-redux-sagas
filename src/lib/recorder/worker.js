@@ -1,7 +1,7 @@
 import { put } from 'redux-saga/effects'
 import { channel } from 'redux-saga'
 
-import { recordAudioFailure, recordAudioSuccess } from './action'
+import { recordAudioFailure, recordAudioSuccess, updateRecordingTime } from './action'
 
 let RECORDER
 let AUDIO_STREAM
@@ -18,15 +18,21 @@ export function* startRecordingAudioWorker(action) {
 
         RECORDER = new MediaRecorder(AUDIO_STREAM)
         RECORDER.ondataavailable = e => {
-            const audioChunk = [e.data]
             if (RECORDER.state === 'inactive') {
-                let blob = new Blob(audioChunk, { type: 'audio/mpeg-3' })
+                const audioChunk = [e.data]
+                const blob = new Blob(audioChunk, { type: 'audio/mpeg-3' })
                 channelAudio.put(recordAudioSuccess(blob))
+            } else {
+                channelAudio.put(updateRecordingTime())
             }
         }
+        RECORDER.onerror = error => {
+            throw error
+        }
 
-        RECORDER.start()
+        RECORDER.start(1000)
     } catch (e) {
+        AUDIO_STREAM.getTracks().forEach(track => track.stop())
         yield put(recordAudioFailure(e.message))
     }
 }

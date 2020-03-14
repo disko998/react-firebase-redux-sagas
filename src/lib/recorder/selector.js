@@ -11,3 +11,8 @@ export const selectIsRecording = createSelector(
     selectRecorderFeature,
     recorder => recorder.isRecording,
 )
+
+export const selectRecordingTime = createSelector(
+    selectRecorderFeature,
+    recorder => recorder.recordingTime,
+)

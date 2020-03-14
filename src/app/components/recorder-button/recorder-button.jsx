@@ -10,12 +10,14 @@ import {
     stopRecordingAudio,
     selectRecorderFeature,
 } from 'lib/recorder'
+import { Recorder } from 'app/components'
 
-export const RecordJokeButtonComponent = ({
+export const RecorderButtonComponent = ({
     startRecordingAudio,
     stopRecordingAudio,
     audio,
 }) => {
+    const [anchorEl, setAnchorEl] = React.useState(null)
     const classes = useStyles()
 
     const handleRecordAudio = () => {
@@ -24,7 +26,9 @@ export const RecordJokeButtonComponent = ({
 
     return (
         <React.Fragment>
+            <Recorder open={audio.isRecording} anchorEl={anchorEl} />
             <Fab
+                ref={setAnchorEl}
                 onClick={handleRecordAudio}
                 aria-label='Add'
                 className={classes.fab}
@@ -45,7 +49,7 @@ const dispatchToProps = dispatch => ({
     stopRecordingAudio: () => dispatch(stopRecordingAudio()),
 })
 
-export const RecordJokeButton = connect(
+export const RecorderButton = connect(
     mapStateToProps,
     dispatchToProps,
-)(RecordJokeButtonComponent)
+)(RecorderButtonComponent)

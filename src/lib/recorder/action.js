@@ -4,6 +4,7 @@ export const RecorderActionType = {
     RECORD_AUDIO_SUCCESS: 'RECORD_AUDIO_SUCCESS',
     RECORD_AUDIO_FAILURE: 'RECORD_AUDIO_FAILURE',
     CLEAR_AUDIO_RECORD: 'CLEAR_AUDIO_RECORD',
+    UPDATE_RECORDING_TIME: 'UPDATE_RECORDING_TIME',
 }
 
 export const startRecordingAudio = () => ({
@@ -26,4 +27,8 @@ export const recordAudioFailure = errorMessage => ({
 
 export const clearAudioRecord = () => ({
     type: RecorderActionType.CLEAR_AUDIO_RECORD,
+})
+
+export const updateRecordingTime = time => ({
+    type: RecorderActionType.UPDATE_RECORDING_TIME,
 })
