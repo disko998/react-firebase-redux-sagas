@@ -17,9 +17,10 @@ export function* startRecordingAudioWorker(action) {
         }
 
         RECORDER = new MediaRecorder(AUDIO_STREAM)
+        const audioChunk = []
         RECORDER.ondataavailable = e => {
+            audioChunk.push(e.data)
             if (RECORDER.state === 'inactive') {
-                const audioChunk = [e.data]
                 const blob = new Blob(audioChunk, { type: 'audio/mpeg-3' })
                 channelAudio.put(recordAudioSuccess(blob))
             } else {

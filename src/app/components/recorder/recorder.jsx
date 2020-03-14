@@ -28,7 +28,7 @@ export const RecorderComponent = ({ open, anchorEl, recordingTime, stopRecording
                             Recording joke
                         </Typography>
                         <Typography className={classes.timer}>
-                            ({userTime}s/60s)
+                            ({userTime}s/{MAX_RECORDING_TIME_SEC}s)
                         </Typography>
                     </Paper>
                 </Fade>
