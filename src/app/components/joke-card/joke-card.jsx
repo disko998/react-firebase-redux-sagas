@@ -29,7 +29,7 @@ export const JokeCardComponent = ({ joke, toggleLike, user }) => {
             <IconButton
                 onClick={onLike}
                 className={classes.iconButton}
-                isLiked={isLiked}
+                isliked={isLiked}
                 edge='start'
                 aria-label='like'
             >

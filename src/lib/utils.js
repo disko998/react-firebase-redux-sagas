@@ -15,3 +15,9 @@ export function blobToFile(theBlob, fileName) {
 export function sortByDate(a, b) {
     return new Date(b.createdAt.seconds) - new Date(a.createdAt.seconds)
 }
+
+export const filterString = (value, filter) => {
+    value = value.toLowerCase()
+    filter = filter.toLowerCase()
+    return value.indexOf(filter) !== -1
+}
