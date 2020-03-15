@@ -6,6 +6,7 @@ import {
     subscribeToJokesWorker,
     unsubscribeFromJokesWorker,
     channelJokes,
+    toggleLikeWorker,
 } from './worker'
 
 function* watchUploadJoke() {
@@ -23,6 +24,10 @@ function* watchUnsubscribeJokesChannel() {
     )
 }
 
+function* watchToggleLike() {
+    yield takeLatest(JokesActionType.TOGGLE_LIKE, toggleLikeWorker)
+}
+
 export function* watchJokesChannel() {
     while (true) {
         const action = yield take(channelJokes)
@@ -35,5 +40,6 @@ export default function* jokesSagas() {
         call(watchSubscribeJokesChannel),
         call(watchUnsubscribeJokesChannel),
         call(watchJokesChannel),
+        call(watchToggleLike),
     ])
 }

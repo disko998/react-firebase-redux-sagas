@@ -6,6 +6,9 @@ export const JokesActionType = {
     UNSUBSCRIBE_JOKES_CHANNEL: 'UNSUBSCRIBE_JOKES_CHANNEL',
     FETCH_JOKES_SUCCESS: 'FETCH_JOKES_SUCCESS',
     FETCH_JOKES_FAILURE: 'FETCH_JOKES_FAILURE',
+    TOGGLE_LIKE: 'TOGGLE_LIKE',
+    LIKE_JOKE_SUCCESS: 'LIKE_JOKE_SUCCESS',
+    LIKE_JOKE_FAILURE: 'LIKE_JOKE_FAILURE',
 }
 
 export const uploadJoke = (name, audio) => ({
@@ -41,5 +44,20 @@ export const fetchJokesSuccess = jokes => ({
 
 export const fetchJokesFailure = errorMessage => ({
     type: JokesActionType.FETCH_JOKES_FAILURE,
+    payload: errorMessage,
+})
+
+export const toggleLike = jokeId => ({
+    type: JokesActionType.TOGGLE_LIKE,
+    payload: jokeId,
+})
+
+export const likeJokeSuccess = updatedJoke => ({
+    type: JokesActionType.LIKE_JOKE_SUCCESS,
+    payload: updatedJoke,
+})
+
+export const likeJokeFailure = errorMessage => ({
+    type: JokesActionType.LIKE_JOKE_FAILURE,
     payload: errorMessage,
 })

@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React from 'react'
 import { Box, IconButton, Typography } from '@material-ui/core'
 import EmojiEmotionsIcon from '@material-ui/icons/EmojiEmotions'
@@ -5,9 +6,17 @@ import EmojiEmotionsOutlinedIcon from '@material-ui/icons/EmojiEmotionsOutlined'
 
 import { AudioPlayer } from '../audio-player'
 import { useStyles } from './styles'
+import { connect } from 'react-redux'
+import { toggleLike } from 'lib/jokes'
+import { selectCurrentUser } from 'lib/user/selector'
 
-export const JokeCard = ({ joke }) => {
-    const classes = useStyles()
+export const JokeCardComponent = ({ joke, toggleLike, user }) => {
+    const isLiked = joke.likes.includes(user.id)
+    const classes = useStyles(isLiked)
+
+    const onLike = () => {
+        toggleLike(joke.id)
+    }
 
     return (
         <Box
@@ -18,13 +27,14 @@ export const JokeCard = ({ joke }) => {
             className={classes.card}
         >
             <IconButton
+                onClick={onLike}
                 className={classes.iconButton}
-                color={'secondary'}
+                isLiked={isLiked}
                 edge='start'
                 aria-label='like'
             >
-                <span className={classes.likes}>{joke.likes}</span>
-                <EmojiEmotionsOutlinedIcon />
+                <span className={classes.likes}>{joke.likes.length}</span>
+                {isLiked ? <EmojiEmotionsIcon /> : <EmojiEmotionsOutlinedIcon />}
             </IconButton>
             <Box
                 display='flex'
@@ -39,3 +49,13 @@ export const JokeCard = ({ joke }) => {
         </Box>
     )
 }
+
+const mapStateToProps = state => ({
+    user: selectCurrentUser(state),
+})
+
+const mapDispatchToProps = dispatch => ({
+    toggleLike: jokeId => dispatch(toggleLike(jokeId)),
+})
+
+export const JokeCard = connect(mapStateToProps, mapDispatchToProps)(JokeCardComponent)

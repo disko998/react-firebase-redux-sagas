@@ -11,6 +11,8 @@ export const useStyles = makeStyles(theme => ({
     iconButton: {
         color: theme.palette.secondary.main,
         textAlign: 'center',
+        color: isLiked =>
+            isLiked ? theme.palette.error.dark : theme.palette.error.light,
     },
     likes: {
         marginTop: 4,

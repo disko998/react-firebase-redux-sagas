@@ -51,7 +51,7 @@ export const recordUserJoke = async (user, audioURL, metadata) => {
     const docRef = await collectionRef.add({
         name: metadata.name,
         author: user.id,
-        likes: 0,
+        likes: [],
         audio: audioURL,
         createdAt: new Date(),
     })
@@ -66,13 +66,30 @@ export const recordUserJoke = async (user, audioURL, metadata) => {
     }
 }
 
-const getUserDataById = async id => {
-    const userRef = db.doc(`users/${id}`)
-    const userSnapshot = await userRef.get()
+export const updateJokeLikes = async (jokeId, userId) => {
+    // TODO: Need to be transaction
+    const jokeRef = db.doc(`jokes/${jokeId}`)
+    const jokeSnapshot = await jokeRef.get()
 
-    if (userSnapshot.exists) {
-        return userSnapshot.data()
+    if (!jokeSnapshot.exists) {
+        throw new Error('Document does not exists or is deleted')
     }
 
-    return null
+    const joke = jokeSnapshot.data()
+
+    const index = joke.likes.indexOf(userId)
+
+    if (index === -1) {
+        joke.likes = [...joke.likes, userId]
+        await jokeRef.update({
+            likes: joke.likes,
+        })
+    } else {
+        joke.likes.splice(index, 1)
+        await jokeRef.update({
+            likes: joke.likes,
+        })
+    }
+
+    return joke
 }

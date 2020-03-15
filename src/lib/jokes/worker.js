@@ -1,13 +1,15 @@
 import { call, put, select } from 'redux-saga/effects'
 import { channel } from 'redux-saga'
 
-import { recordUserJoke, db, saveAudioToStorage } from 'lib/firebase'
+import { recordUserJoke, db, saveAudioToStorage, updateJokeLikes } from 'lib/firebase'
 import { selectCurrentUser } from 'lib/user/selector'
 import {
     uploadJokeSuccess,
     uploadJokeFailure,
     fetchJokesSuccess,
     fetchJokesFailure,
+    likeJokeSuccess,
+    likeJokeFailure,
 } from './action'
 
 const JOKES_LIMIT = 5
@@ -55,5 +57,15 @@ export function* uploadJokeWorker(action) {
         yield put(uploadJokeSuccess(joke))
     } catch (e) {
         yield put(uploadJokeFailure(e.message))
+    }
+}
+
+export function* toggleLikeWorker(action) {
+    try {
+        const jokeId = action.payload
+        const user = yield select(selectCurrentUser)
+        yield call(updateJokeLikes, jokeId, user.id)
+    } catch (error) {
+        yield put(likeJokeFailure(error.message))
     }
 }
