@@ -1,7 +1,7 @@
 TODO:
+[x] Likes action needs to use transaction
+[x] Register user with display name
 
--   Likes action needs to use transaction
--   Register user with display name
 -   Mobile friendly
 -   Penetration testing
 -   Logo and assets for production

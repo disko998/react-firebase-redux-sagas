@@ -11,7 +11,12 @@ import { selectErrorMessage } from 'lib/user/selector'
 
 export const AuthFormComponent = ({ registerUser, loginUser, authError }) => {
     const [showPassword, setShowPassword] = useState(false)
-    const [userCredentials, setUserCredentials] = useState({ email: '', password: '' })
+    const [isRegistration, setIsRegistration] = useState(false)
+    const [userCredentials, setUserCredentials] = useState({
+        email: '',
+        password: '',
+        displayName: '',
+    })
 
     const classes = useStyles()
 
@@ -25,13 +30,15 @@ export const AuthFormComponent = ({ registerUser, loginUser, authError }) => {
         loginUser(userCredentials)
     }
     const onRegister = () => {
-        registerUser(userCredentials)
+        userCredentials.displayName
+            ? registerUser(userCredentials)
+            : setIsRegistration(true)
     }
 
     return (
         <Box boxShadow={3} className={classes.formWrapper}>
             <form className={classes.form} onSubmit={onLogin}>
-                <Title variant='h4'>Login</Title>
+                <Title variant='h4'>{'Authorization'}</Title>
                 <TextInput
                     required={true}
                     value={userCredentials.email}
@@ -50,6 +57,15 @@ export const AuthFormComponent = ({ registerUser, loginUser, authError }) => {
                     onIconPress={toggleShowPass}
                     onChange={onTextChange}
                 />
+                {isRegistration && (
+                    <TextInput
+                        value={userCredentials.displayName}
+                        error={Boolean(authError)}
+                        label={'Display Name'}
+                        id='displayName'
+                        onChange={onTextChange}
+                    />
+                )}
                 <Box mt={3}>
                     <Button
                         type='submit'

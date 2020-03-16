@@ -35,10 +35,10 @@ export function* loginAfterRegistration({ payload }) {
 }
 
 export function* registerUser(action) {
-    const { email, password } = action.payload
+    const { email, password, displayName } = action.payload
     try {
         const authUser = yield auth.createUserWithEmailAndPassword(email, password)
-        yield put(registerUserSuccess(authUser.user))
+        yield put(registerUserSuccess({ ...authUser.user, displayName: displayName }))
     } catch (e) {
         yield put(registerUserFailure(e.message))
     }

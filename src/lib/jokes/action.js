@@ -7,8 +7,8 @@ export const JokesActionType = {
     FETCH_JOKES_SUCCESS: 'FETCH_JOKES_SUCCESS',
     FETCH_JOKES_FAILURE: 'FETCH_JOKES_FAILURE',
     TOGGLE_LIKE: 'TOGGLE_LIKE',
-    LIKE_JOKE_SUCCESS: 'LIKE_JOKE_SUCCESS',
-    LIKE_JOKE_FAILURE: 'LIKE_JOKE_FAILURE',
+    TOGGLE_LIKE_SUCCESS: 'TOGGLE_LIKE_SUCCESS',
+    TOGGLE_LIKE_FAILURE: 'TOGGLE_LIKE_FAILURE',
 }
 
 export const uploadJoke = (name, audio) => ({
@@ -52,12 +52,11 @@ export const toggleLike = jokeId => ({
     payload: jokeId,
 })
 
-export const likeJokeSuccess = updatedJoke => ({
-    type: JokesActionType.LIKE_JOKE_SUCCESS,
-    payload: updatedJoke,
+export const toggleLikeSuccess = () => ({
+    type: JokesActionType.TOGGLE_LIKE_SUCCESS,
 })
 
-export const likeJokeFailure = errorMessage => ({
-    type: JokesActionType.LIKE_JOKE_FAILURE,
+export const toggleLikeFailure = errorMessage => ({
+    type: JokesActionType.TOGGLE_LIKE_FAILURE,
     payload: errorMessage,
 })

@@ -14,7 +14,7 @@ export const checkUsersSession = () => {
 }
 
 export const getAuthUserRef = async user => {
-    const { uid, email, emailVerified } = user
+    const { uid, email, emailVerified, displayName } = user
 
     const userRef = db.collection('users').doc(uid)
     const userSnapshot = await userRef.get()
@@ -26,7 +26,7 @@ export const getAuthUserRef = async user => {
     await userRef.set({
         email,
         emailVerified,
-        displayName: 'Anonymous',
+        displayName: displayName,
         avatar: '',
         createdAt: new Date(),
     })
@@ -66,30 +66,20 @@ export const recordUserJoke = async (user, audioURL, metadata) => {
     }
 }
 
-export const updateJokeLikes = async (jokeId, userId) => {
-    // TODO: Need to be transaction
+export const updateJokeLikesTransaction = async (jokeId, userId) => {
     const jokeRef = db.doc(`jokes/${jokeId}`)
-    const jokeSnapshot = await jokeRef.get()
 
-    if (!jokeSnapshot.exists) {
-        throw new Error('Document does not exists or is deleted')
-    }
+    return await db.runTransaction(async transaction => {
+        const jokeSnapshot = await transaction.get(jokeRef)
+        if (!jokeSnapshot.exists) {
+            throw new Error('Document does not exists or is deleted')
+        }
 
-    const joke = jokeSnapshot.data()
+        const joke = jokeSnapshot.data()
+        const index = joke.likes.indexOf(userId)
 
-    const index = joke.likes.indexOf(userId)
+        index === -1 ? joke.likes.push(userId) : joke.likes.splice(index, 1)
 
-    if (index === -1) {
-        joke.likes = [...joke.likes, userId]
-        await jokeRef.update({
-            likes: joke.likes,
-        })
-    } else {
-        joke.likes.splice(index, 1)
-        await jokeRef.update({
-            likes: joke.likes,
-        })
-    }
-
-    return joke
+        return transaction.update(jokeRef, { likes: joke.likes })
+    })
 }
