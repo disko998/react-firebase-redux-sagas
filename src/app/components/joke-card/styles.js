@@ -2,14 +2,9 @@ import { makeStyles } from '@material-ui/core/styles'
 
 export const useStyles = makeStyles(theme => ({
     card: {
-        padding: 30,
-        overflow: 'hidden',
-        display: 'flex',
-        justifyContent: 'space-around',
-        alignItems: 'center',
+        padding: 20,
     },
     iconButton: {
-        color: theme.palette.secondary.main,
         textAlign: 'center',
         color: isliked =>
             isliked ? theme.palette.error.dark : theme.palette.error.light,
@@ -23,13 +18,17 @@ export const useStyles = makeStyles(theme => ({
         color: theme.palette.primary.main,
         fontSize: 17,
         fontWeight: 500,
+        width: '100%',
+        overflow: 'hidden',
     },
-    category: {
+    author: {
         fontSize: 15,
         color: theme.color.dark,
         textTransform: 'capitalize',
     },
-    expendButton: {
-        color: theme.color.gray,
+    infoWrapper: {
+        display: 'flex',
+        justifyContent: 'flex-start',
+        alignItems: 'center',
     },
 }))

@@ -1,6 +1,6 @@
 // @ts-nocheck
 import React from 'react'
-import { Box, IconButton, Typography } from '@material-ui/core'
+import { Box, IconButton, Typography, Grid } from '@material-ui/core'
 import EmojiEmotionsIcon from '@material-ui/icons/EmojiEmotions'
 import EmojiEmotionsOutlinedIcon from '@material-ui/icons/EmojiEmotionsOutlined'
 
@@ -19,33 +19,31 @@ export const JokeCardComponent = ({ joke, toggleLike, user }) => {
     }
 
     return (
-        <Box
-            boxShadow={1}
-            display='flex'
-            justifyContent='flex-start'
-            alignItems='center'
-            className={classes.card}
-        >
-            <IconButton
-                onClick={onLike}
-                className={classes.iconButton}
-                isliked={isLiked}
-                edge='start'
-                aria-label='like'
-            >
-                <span className={classes.likes}>{joke.likes.length}</span>
-                {isLiked ? <EmojiEmotionsIcon /> : <EmojiEmotionsOutlinedIcon />}
-            </IconButton>
-            <Box
-                display='flex'
-                flexDirection='column'
-                justifyContent='center'
-                alignItems='flex-start'
-            >
-                <Typography className={classes.title}>{joke.name}</Typography>
-                <Typography className={classes.category}>{joke.author.name}</Typography>
-            </Box>
-            <AudioPlayer src={joke.audio} />
+        <Box boxShadow={1} className={classes.card}>
+            <Grid container>
+                <Grid item xs={12} sm={4}>
+                    <Box className={classes.infoWrapper}>
+                        <IconButton
+                            onClick={onLike}
+                            className={classes.iconButton}
+                            isliked={isLiked}
+                            edge='start'
+                            aria-label='like'
+                        >
+                            <span className={classes.likes}>{joke.likes.length}</span>
+                            {isLiked ? (
+                                <EmojiEmotionsIcon />
+                            ) : (
+                                <EmojiEmotionsOutlinedIcon />
+                            )}
+                        </IconButton>
+                        <Typography className={classes.title}>{joke.name}</Typography>
+                    </Box>
+                </Grid>
+                <Grid item xs={12} sm={8}>
+                    <AudioPlayer src={joke.audio} />
+                </Grid>
+            </Grid>
         </Box>
     )
 }
