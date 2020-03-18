@@ -16,8 +16,7 @@ import {
     toggleLikeSuccess,
     toggleLikeFailure,
 } from './action'
-
-const JOKES_LIMIT = process.env.NODE_ENV === 'development' ? 5 : 10
+import { JOKES_LIMIT } from './const'
 
 let unsubscribeJokesListener
 

@@ -1,48 +1,56 @@
 import React from 'react'
-import { Popper, Fade, Paper, Typography } from '@material-ui/core'
 import { connect } from 'react-redux'
+import { Fab, Typography } from '@material-ui/core'
+import MicOutlinedIcon from '@material-ui/icons/MicOutlined'
+import MicOffIcon from '@material-ui/icons/MicOff'
 
-import './pulsAnimation.css'
+import { MAX_RECORDING_TIME_SEC } from 'lib/recorder/const'
 import { useStyles } from './styles'
 import {
-    selectRecordingTime,
-    MAX_RECORDING_TIME_SEC,
+    startRecordingAudio,
     stopRecordingAudio,
+    selectRecorderFeature,
 } from 'lib/recorder'
 
-export const RecorderComponent = ({ open, anchorEl, recordingTime, stopRecording }) => {
+export const RecorderComponent = ({ startRecordingAudio, stopRecordingAudio, audio }) => {
+    const { recordingTime, isRecording } = audio
     const classes = useStyles()
     const userTime = recordingTime < 10 ? `0${recordingTime}` : recordingTime
 
+    const handleRecordAudio = e => {
+        isRecording ? stopRecordingAudio() : startRecordingAudio()
+    }
+
     if (recordingTime >= MAX_RECORDING_TIME_SEC) {
-        stopRecording()
+        stopRecordingAudio()
     }
 
     return (
-        <Popper open={open} anchorEl={anchorEl} placement={'top-end'} transition>
-            {({ TransitionProps }) => (
-                <Fade {...TransitionProps} timeout={350}>
-                    <Paper className={classes.wrapper}>
-                        <div className={`${classes.indicator} rec`}></div>
-                        <Typography className={classes.typography}>
-                            Recording joke
-                        </Typography>
-                        <Typography className={classes.timer}>
-                            ({userTime}s/{MAX_RECORDING_TIME_SEC}s)
-                        </Typography>
-                    </Paper>
-                </Fade>
+        <Fab
+            variant={isRecording ? 'extended' : 'round'}
+            type={'button'}
+            onClick={handleRecordAudio}
+            aria-label='Add'
+            className={classes.fab}
+            color={isRecording ? 'secondary' : 'primary'}
+        >
+            {isRecording ? <MicOffIcon /> : <MicOutlinedIcon />}
+            {isRecording && (
+                <Typography
+                    className={classes.timer}
+                >{`${userTime}s/${MAX_RECORDING_TIME_SEC}s`}</Typography>
             )}
-        </Popper>
+        </Fab>
     )
 }
 
 const mapStateToProps = state => ({
-    recordingTime: selectRecordingTime(state),
+    audio: selectRecorderFeature(state),
 })
 
 const dispatchToProps = dispatch => ({
-    stopRecording: () => dispatch(stopRecordingAudio()),
+    startRecordingAudio: () => dispatch(startRecordingAudio()),
+    stopRecordingAudio: () => dispatch(stopRecordingAudio()),
 })
 
 export const Recorder = connect(mapStateToProps, dispatchToProps)(RecorderComponent)

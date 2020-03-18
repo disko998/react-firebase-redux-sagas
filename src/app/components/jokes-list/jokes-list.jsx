@@ -33,7 +33,7 @@ export const JokesListComponent = ({
                 onChange={onSearchTextChange}
                 onClear={clearFilter}
             />
-            <Box boxShadow={3}>
+            <Box boxShadow={3} mb={4}>
                 {filteredJokes.map(joke => (
                     <JokeCard joke={joke} key={joke.id} />
                 ))}

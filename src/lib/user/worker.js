@@ -23,6 +23,9 @@ export function* loginAuthUser(authUser) {
 export function* loginUser(action) {
     const { email, password } = action.payload
     try {
+        if (!email.length && !password.length) {
+            throw new Error('Please fill out the form')
+        }
         const authUser = yield auth.signInWithEmailAndPassword(email, password)
         yield loginAuthUser(authUser.user)
     } catch (e) {
