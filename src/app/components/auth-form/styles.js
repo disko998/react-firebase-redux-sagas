@@ -16,11 +16,14 @@ export const useStyles = makeStyles(theme => ({
     form: {
         width: '100%',
     },
-}))
-
-export const Title = withStyles({
-    root: {
-        textAlign: 'center',
-        marginBottom: 20,
+    logoWrapper: {
+        width: '100%',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
     },
-})(Typography)
+    logo: {
+        height: 60,
+        width: 'auto',
+    },
+}))

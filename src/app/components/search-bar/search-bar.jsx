@@ -20,7 +20,7 @@ export function SearchBar({ onClear, ...inputProps }) {
             </IconButton>
             <input
                 type='text'
-                placeholder='Search All Tracks'
+                placeholder='Search All Jokes'
                 className={classes.input}
                 {...inputProps}
             />

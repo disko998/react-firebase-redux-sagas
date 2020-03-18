@@ -3,9 +3,10 @@ import { connect } from 'react-redux'
 import { Card, Button, Box } from '@material-ui/core'
 import LockOpenIcon from '@material-ui/icons/LockOpen'
 import AssignmentIndIcon from '@material-ui/icons/AssignmentInd'
+import Logo from '../../../assets/logo.svg'
 
 import { TextInput } from 'app/components/text-input'
-import { useStyles, Title } from './styles'
+import { useStyles } from './styles'
 import { loginUser, registerUser } from 'lib/user/action'
 import { selectErrorMessage } from 'lib/user/selector'
 
@@ -27,18 +28,30 @@ export const AuthFormComponent = ({ registerUser, loginUser, authError }) => {
     }
     const onLogin = e => {
         e.preventDefault()
-        loginUser(userCredentials)
+        isRegistration ? setIsRegistration(false) : loginUser(userCredentials)
+        setUserCredentials({
+            email: '',
+            password: '',
+            displayName: '',
+        })
     }
     const onRegister = () => {
         userCredentials.displayName
             ? registerUser(userCredentials)
             : setIsRegistration(true)
+        setUserCredentials({
+            email: '',
+            password: '',
+            displayName: '',
+        })
     }
 
     return (
         <Card elevation={2} className={classes.formWrapper}>
             <form className={classes.form} onSubmit={onLogin}>
-                <Title variant='h4'>{'Mp3Jokes'}</Title>
+                <div className={classes.logoWrapper}>
+                    <img src={Logo} alt='logo' className={classes.logo} />
+                </div>
                 <TextInput
                     required={true}
                     value={userCredentials.email}
