@@ -1,7 +1,7 @@
 import React from 'react'
 import { Grid, Container, Box } from '@material-ui/core'
 
-import { AuthForm } from 'app/components'
+import { AuthForm, GitHubCorner } from 'app/components'
 import { useStyles } from './styles'
 
 export const AuthPage = () => {
@@ -16,6 +16,7 @@ export const AuthPage = () => {
                     </Grid>
                 </Box>
             </Container>
+            <GitHubCorner />
         </div>
     )
 }

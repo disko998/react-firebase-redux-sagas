@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { connect } from 'react-redux'
-import { Box, Button } from '@material-ui/core'
+import { Card, Button, Box } from '@material-ui/core'
 import LockOpenIcon from '@material-ui/icons/LockOpen'
 import AssignmentIndIcon from '@material-ui/icons/AssignmentInd'
 
@@ -36,9 +36,9 @@ export const AuthFormComponent = ({ registerUser, loginUser, authError }) => {
     }
 
     return (
-        <Box boxShadow={3} className={classes.formWrapper}>
+        <Card elevation={2} className={classes.formWrapper}>
             <form className={classes.form} onSubmit={onLogin}>
-                <Title variant='h4'>{'Authorization'}</Title>
+                <Title variant='h4'>{'Mp3Jokes'}</Title>
                 <TextInput
                     required={true}
                     value={userCredentials.email}
@@ -90,7 +90,7 @@ export const AuthFormComponent = ({ registerUser, loginUser, authError }) => {
                     </Button>
                 </Box>
             </form>
-        </Box>
+        </Card>
     )
 }
 
