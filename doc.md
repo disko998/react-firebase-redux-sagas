@@ -2,9 +2,9 @@ TODO:
 [x] Likes action needs to use transaction
 [x] Register user with display name
 [x] Mobile friendly
+[x] Penetration testing
+[x] Logo and assets for production
 
--   Penetration testing
--   Logo and assets for production
 -   Publish beta version on heroku
 
 Later TODO:
