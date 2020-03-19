@@ -6,6 +6,7 @@ TODO:
 [x] Logo and assets for production
 
 -   Publish beta version on heroku
+-   Secure firebase and api key
 
 Later TODO:
 

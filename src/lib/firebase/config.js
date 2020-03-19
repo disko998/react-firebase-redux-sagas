@@ -4,7 +4,7 @@ import 'firebase/firestore'
 import 'firebase/storage'
 
 const firebaseConfig = {
-    apiKey: 'AIzaSyB2Q0GYGquaQE_9wv84p6Xobf2YHBqlOj8',
+    apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
     authDomain: 'audito-4c3df.firebaseapp.com',
     databaseURL: 'https://audito-4c3df.firebaseio.com',
     projectId: 'audito-4c3df',
