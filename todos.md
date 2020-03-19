@@ -1,15 +1,15 @@
-TODO:
+Done:
 [x] Likes action needs to use transaction
 [x] Register user with display name
 [x] Mobile friendly
 [x] Penetration testing
 [x] Logo and assets for production
+[x] Publish beta version on herokus
+[x] Secure firebase and api key
 
--   Publish beta version on heroku
--   Secure firebase and api key
+TODO:
 
-Later TODO:
-
+-   host on firebase
 -   display author name
 -   pagination
 -   facebook, google sign in
@@ -17,4 +17,5 @@ Later TODO:
 -   change display name feature
 -   PWA
 -   firebase functions, confirm email, reset password
--   find way to fix same joke title problem
+-   find way to fix same joke title problem in firestore
+-   audio player attributes for better experience

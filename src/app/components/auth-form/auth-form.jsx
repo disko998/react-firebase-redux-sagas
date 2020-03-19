@@ -29,21 +29,11 @@ export const AuthFormComponent = ({ registerUser, loginUser, authError }) => {
     const onLogin = e => {
         e.preventDefault()
         isRegistration ? setIsRegistration(false) : loginUser(userCredentials)
-        setUserCredentials({
-            email: '',
-            password: '',
-            displayName: '',
-        })
     }
     const onRegister = () => {
         userCredentials.displayName
             ? registerUser(userCredentials)
             : setIsRegistration(true)
-        setUserCredentials({
-            email: '',
-            password: '',
-            displayName: '',
-        })
     }
 
     return (
