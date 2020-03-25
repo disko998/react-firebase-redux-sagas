@@ -1,15 +1,14 @@
-Done:
+TODO:
+
 [x] Likes action needs to use transaction
 [x] Register user with display name
 [x] Mobile friendly
 [x] Penetration testing
 [x] Logo and assets for production
-[x] Publish beta version on herokus
+[x] Publish beta version on heroku
 [x] Secure firebase and api key
+[x] host on firebase
 
-TODO:
-
--   host on firebase
 -   display author name
 -   pagination
 -   facebook, google sign in
