@@ -1,7 +1,7 @@
 # App demo
 This app lets you listen to some funny jokes and share yours
 
-https://mp3jokes.herokuapp.com/
+https://mp3-jokes.firebaseapp.com/
 
 # For developers
 
