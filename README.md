@@ -1,7 +1,7 @@
-# App demo
+# Mp3Jokes
 This app lets you listen to some funny jokes and share yours
 
-https://mp3-jokes.firebaseapp.com/
+Visit [Mp3Jokes](https://mp3-jokes.firebaseapp.com/)
 
 # For developers
 
