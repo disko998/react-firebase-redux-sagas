@@ -14,7 +14,7 @@ https://mp3-jokes.firebaseapp.com/
   - Auth
   - Firestore
   - Storage
-  - Cloud functions
+  - Hosting
 
 ## How to run the project?
 Install [yarn](https://yarnpkg.com/) 
