@@ -17,7 +17,7 @@ export function NavbarComponent({ user }) {
                         <Typography variant='h6' className={classes.title}>
                             {user.displayName}
                         </Typography>
-                        <UserMenu />
+                        <UserMenu avatar={user.avatar} />
                     </Toolbar>
                 </Container>
             </AppBar>

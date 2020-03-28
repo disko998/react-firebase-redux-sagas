@@ -26,4 +26,11 @@ export const useStyles = makeStyles(theme => ({
         height: 60,
         width: 'auto',
     },
+    socialWrapper: {
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
+        width: '100%',
+    },
 }))

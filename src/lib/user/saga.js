@@ -7,6 +7,9 @@ import {
     getUserSession,
     logoutUser,
     loginAfterRegistration,
+    loginWithGoogleWorker,
+    loginWithFacebookWorker,
+    loginWithGithubWorker,
 } from './worker'
 
 function* watchLoginUser() {
@@ -29,6 +32,18 @@ function* watchLogoutUser() {
     yield takeEvery(UserActionTypes.LOGOUT_USER, logoutUser)
 }
 
+function* watchLoginWithGoogle() {
+    yield takeEvery(UserActionTypes.LOGIN_WITH_GOOGLE, loginWithGoogleWorker)
+}
+
+function* watchLoginWithFacebook() {
+    yield takeEvery(UserActionTypes.LOGIN_WITH_FACEBOOK, loginWithFacebookWorker)
+}
+
+function* watchLoginWithGithub() {
+    yield takeEvery(UserActionTypes.LOGIN_WITH_GITHUB, loginWithGithubWorker)
+}
+
 export default function* userSagas() {
     yield all([
         call(watchLoginUser),
@@ -36,5 +51,8 @@ export default function* userSagas() {
         call(watchCheckUserSession),
         call(watchLogoutUser),
         call(watchRegisterUserSuccess),
+        call(watchLoginWithGoogle),
+        call(watchLoginWithFacebook),
+        call(watchLoginWithGithub),
     ])
 }

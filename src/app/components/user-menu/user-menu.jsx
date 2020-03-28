@@ -2,15 +2,16 @@ import React from 'react'
 import { logoutUser } from 'lib/user/action'
 import ListItemIcon from '@material-ui/core/ListItemIcon'
 import ListItemText from '@material-ui/core/ListItemText'
+
 import ExitToAppIcon from '@material-ui/icons/ExitToApp'
 import PersonIcon from '@material-ui/icons/Person'
 import AccountCircleIcon from '@material-ui/icons/AccountCircle'
 import QueueMusicIcon from '@material-ui/icons/QueueMusic'
 
-import { StyledMenu, StyledMenuItem, UserButton } from './styles'
+import { StyledMenu, StyledMenuItem, UserButton, UserAvatar } from './styles'
 import { connect } from 'react-redux'
 
-export function UserMenuComponent({ logoutUser }) {
+export function UserMenuComponent({ logoutUser, avatar }) {
     const [anchorEl, setAnchorEl] = React.useState(null)
 
     const handleClick = event => {
@@ -24,7 +25,11 @@ export function UserMenuComponent({ logoutUser }) {
     return (
         <div>
             <UserButton onClick={handleClick}>
-                <AccountCircleIcon />
+                {avatar ? (
+                    <UserAvatar alt='Avatar' src={avatar} />
+                ) : (
+                    <AccountCircleIcon />
+                )}
             </UserButton>
             <StyledMenu
                 id='customized-menu'

@@ -10,6 +10,9 @@ export const UserActionTypes = {
     LOGOUT_USER: 'LOGOUT_USER',
     LOGOUT_USER_SUCCESS: 'LOGOUT_USER_SUCCESS',
     LOGOUT_USER_FAILURE: 'LOGOUT_USER_FAILURE',
+    LOGIN_WITH_GOOGLE: 'LOGIN_WITH_GOOGLE',
+    LOGIN_WITH_FACEBOOK: 'LOGIN_WITH_FACEBOOK',
+    LOGIN_WITH_GITHUB: 'LOGIN_WITH_GITHUB',
 }
 
 export const loginUser = credentials => ({
@@ -61,4 +64,16 @@ export const logoutUserFailure = errorMessage => ({
 
 export const checkUserSessionFinish = () => ({
     type: UserActionTypes.CHECK_USER_SESSION_FINISH,
+})
+
+export const loginWithGoogle = () => ({
+    type: UserActionTypes.LOGIN_WITH_GOOGLE,
+})
+
+export const loginWithFacebook = () => ({
+    type: UserActionTypes.LOGIN_WITH_FACEBOOK,
+})
+
+export const loginWithGithub = () => ({
+    type: UserActionTypes.LOGIN_WITH_GITHUB,
 })

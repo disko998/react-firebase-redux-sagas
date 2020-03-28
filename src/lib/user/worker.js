@@ -1,5 +1,12 @@
 import { call, put } from 'redux-saga/effects'
-import { auth, checkUsersSession, getAuthUserRef } from 'lib/firebase'
+import {
+    auth,
+    checkUsersSession,
+    getAuthUserRef,
+    facebookProvider,
+    googleProvider,
+    githubProvider,
+} from 'lib/firebase'
 import {
     loginUserSuccess,
     loginUserFailure,
@@ -66,5 +73,47 @@ export function* getUserSession() {
         yield loginAuthUser(authUser)
     } catch (e) {
         yield put(checkUserSessionFinish())
+    }
+}
+
+export function* loginWithGoogleWorker() {
+    try {
+        const response = yield auth.signInWithPopup(googleProvider)
+        yield loginAuthUser(response.user)
+    } catch (e) {
+        if (
+            e.code === 'auth/popup-closed-by-user' ||
+            e.code === 'auth/cancelled-popup-request'
+        )
+            return
+        yield put(loginUserFailure(e.message))
+    }
+}
+
+export function* loginWithFacebookWorker() {
+    try {
+        const response = yield auth.signInWithPopup(facebookProvider)
+        yield loginAuthUser(response.user)
+    } catch (e) {
+        if (
+            e.code === 'auth/popup-closed-by-user' ||
+            e.code === 'auth/cancelled-popup-request'
+        )
+            return
+        yield put(loginUserFailure(e.message))
+    }
+}
+
+export function* loginWithGithubWorker() {
+    try {
+        const response = yield auth.signInWithPopup(githubProvider)
+        yield loginAuthUser(response.user)
+    } catch (e) {
+        if (
+            e.code === 'auth/popup-closed-by-user' ||
+            e.code === 'auth/cancelled-popup-request'
+        )
+            return
+        yield put(loginUserFailure(e.message))
     }
 }

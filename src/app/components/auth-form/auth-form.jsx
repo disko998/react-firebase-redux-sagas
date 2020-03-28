@@ -1,16 +1,33 @@
 import React, { useState } from 'react'
 import { connect } from 'react-redux'
 import { Card, Button, Box } from '@material-ui/core'
+
 import LockOpenIcon from '@material-ui/icons/LockOpen'
 import AssignmentIndIcon from '@material-ui/icons/AssignmentInd'
+import FacebookIcon from '../../../assets/icons/facebook.svg'
+import GoogleIcon from '../../../assets/icons/google.svg'
+import GithubIcon from '../../../assets/icons/github.svg'
 import Logo from '../../../assets/logo.svg'
 
-import { TextInput } from 'app/components/text-input'
+import { TextInput, SocialButton } from 'app/components'
 import { useStyles } from './styles'
-import { loginUser, registerUser } from 'lib/user/action'
+import {
+    loginUser,
+    registerUser,
+    loginWithGoogle,
+    loginWithFacebook,
+    loginWithGithub,
+} from 'lib/user/action'
 import { selectErrorMessage } from 'lib/user/selector'
 
-export const AuthFormComponent = ({ registerUser, loginUser, authError }) => {
+export const AuthFormComponent = ({
+    registerUser,
+    loginUser,
+    loginWithGoogle,
+    loginWithFacebook,
+    loginWithGithub,
+    authError,
+}) => {
     const [showPassword, setShowPassword] = useState(false)
     const [isRegistration, setIsRegistration] = useState(false)
     const [userCredentials, setUserCredentials] = useState({
@@ -92,6 +109,23 @@ export const AuthFormComponent = ({ registerUser, loginUser, authError }) => {
                         Register
                     </Button>
                 </Box>
+                <Box className={classes.socialWrapper}>
+                    <SocialButton
+                        onClick={loginWithGoogle}
+                        name='Facebook'
+                        icon={GoogleIcon}
+                    />
+                    <SocialButton
+                        onClick={loginWithFacebook}
+                        name='Facebook'
+                        icon={FacebookIcon}
+                    />
+                    <SocialButton
+                        onClick={loginWithGithub}
+                        name='Facebook'
+                        icon={GithubIcon}
+                    />
+                </Box>
             </form>
         </Card>
     )
@@ -104,6 +138,9 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
     loginUser: credentials => dispatch(loginUser(credentials)),
     registerUser: credentials => dispatch(registerUser(credentials)),
+    loginWithGoogle: () => dispatch(loginWithGoogle()),
+    loginWithFacebook: () => dispatch(loginWithFacebook()),
+    loginWithGithub: () => dispatch(loginWithGithub()),
 })
 
 export const AuthForm = connect(mapStateToProps, mapDispatchToProps)(AuthFormComponent)
