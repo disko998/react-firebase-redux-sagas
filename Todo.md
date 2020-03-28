@@ -1,5 +1,4 @@
 TODO:
-
 [x] Likes action needs to use transaction
 [x] Register user with display name
 [x] Mobile friendly
@@ -8,13 +7,16 @@ TODO:
 [x] Publish beta version on heroku
 [x] Secure firebase and api key
 [x] host on firebase
+[x] facebook, google, github sign in
 
--   display author name
--   pagination
--   facebook, google sign in
--   user avatar
--   change display name feature
+-   audio player attributes for better experience
 -   PWA
 -   firebase functions, confirm email, reset password
 -   find way to fix same joke title problem in firestore
--   audio player attributes for better experience
+
+### FEATURES:
+
+-   display author name
+-   pagination
+-   user avatar
+-   change display name

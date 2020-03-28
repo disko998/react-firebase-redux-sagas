@@ -3,6 +3,13 @@ import firebase from './config'
 export const auth = firebase.auth()
 export const db = firebase.firestore()
 export const storageRef = firebase.storage().ref()
+export const googleProvider = new firebase.auth.GoogleAuthProvider()
+export const facebookProvider = new firebase.auth.FacebookAuthProvider()
+export const githubProvider = new firebase.auth.GithubAuthProvider()
+
+githubProvider.setCustomParameters({ prompt: 'select_account' })
+facebookProvider.setCustomParameters({ prompt: 'select_account' })
+googleProvider.setCustomParameters({ prompt: 'select_account' })
 
 export const checkUsersSession = () => {
     return new Promise((resolve, reject) => {
@@ -14,7 +21,7 @@ export const checkUsersSession = () => {
 }
 
 export const getAuthUserRef = async user => {
-    const { uid, email, emailVerified, displayName } = user
+    const { uid, email, emailVerified, displayName, photoURL } = user
 
     const userRef = db.collection('users').doc(uid)
     const userSnapshot = await userRef.get()
@@ -27,7 +34,7 @@ export const getAuthUserRef = async user => {
         email,
         emailVerified,
         displayName: displayName,
-        avatar: '',
+        avatar: photoURL ? photoURL : '',
         createdAt: new Date(),
     })
 
