@@ -8,9 +8,9 @@ TODO:
 [x] Secure firebase and api key
 [x] host on firebase
 [x] facebook, google, github sign in
+[x] audio player attributes for better experience
+[x] PWA
 
--   audio player attributes for better experience
--   PWA
 -   firebase functions, confirm email, reset password
 -   find way to fix same joke title problem in firestore
 
