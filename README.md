@@ -15,6 +15,7 @@ Visit [Mp3Jokes](https://mp3-jokes.firebaseapp.com/)
   - Firestore
   - Storage
   - Hosting
+* PWA
 
 ## How to run the project?
 Install [yarn](https://yarnpkg.com/) 
