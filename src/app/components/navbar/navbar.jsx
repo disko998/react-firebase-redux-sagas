@@ -29,7 +29,7 @@ export function NavbarComponent({ user, updateUser }) {
             <AppBar position='static'>
                 <Container maxWidth='md'>
                     <Toolbar className={classes.toolbar}>
-                        <EditIcon />
+                        <EditIcon className={classes.editIcon} />
                         <input
                             className={classes.displayName}
                             onChange={onNameChange}

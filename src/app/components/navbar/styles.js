@@ -24,4 +24,7 @@ export const useStyles = makeStyles(theme => ({
     toolbar: {
         padding: 0,
     },
+    editIcon: {
+        height: 20,
+    },
 }))
