@@ -12,8 +12,8 @@ TODO:
 [x] audio player attributes for better experience
 [x] PWA
 [x] change display name
+[x] user avatar
 
--   user avatar
 -   firebase functions, confirm email, reset password
 -   find way to fix same joke title problem in firestore
 -   display author name

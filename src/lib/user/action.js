@@ -16,6 +16,7 @@ export const UserActionTypes = {
     UPDATE_USER: 'UPDATE_USER',
     UPDATE_USER_SUCCESS: 'UPDATE_USER_SUCCESS',
     UPDATE_USER_FAILURE: 'UPDATE_USER_FAILURE',
+    UPLOAD_USER_AVATAR: 'UPLOAD_USER_AVATAR',
 }
 
 export const loginUser = credentials => ({
@@ -94,4 +95,9 @@ export const updateUserSuccess = user => ({
 export const updateUserFailure = errorMessage => ({
     type: UserActionTypes.UPDATE_USER_FAILURE,
     payload: errorMessage,
+})
+
+export const uploadUserAvatar = file => ({
+    type: UserActionTypes.UPLOAD_USER_AVATAR,
+    payload: file,
 })

@@ -42,14 +42,10 @@ export const getAuthUserRef = async user => {
 }
 
 export const saveAudioToStorage = async (metadata, userId) => {
-    try {
-        const audioRef = storageRef.child(`jokes/${userId}/${metadata.name}.mp3`)
-        const snapshot = await audioRef.put(metadata.audio)
+    const audioRef = storageRef.child(`jokes/${userId}/${metadata.name}.mp3`)
+    const snapshot = await audioRef.put(metadata.audio)
 
-        return snapshot.ref.getDownloadURL()
-    } catch (error) {
-        console.log(error)
-    }
+    return snapshot.ref.getDownloadURL()
 }
 
 export const recordUserJoke = async (user, audioURL, metadata) => {
@@ -91,7 +87,7 @@ export const updateJokeLikesTransaction = async (jokeId, userId) => {
     })
 }
 
-export const updateUser = async (partialData, currentUser) => {
+export const updateUserDoc = async (partialData, currentUser) => {
     const userRef = db.doc(`users/${currentUser.id}`)
     const userSnapshot = await userRef.get()
 
@@ -108,4 +104,17 @@ export const updateUser = async (partialData, currentUser) => {
     await userRef.update(newUser)
 
     return newUser
+}
+
+export const uploadAvatar = async (file, currentUser) => {
+    const regex = /image\/(gif|jpe?g|tiff|png|webp|bmp)$/i
+
+    if (!regex.test(file.type)) {
+        throw new Error('Please upload image file')
+    }
+
+    const audioRef = storageRef.child(`images/${currentUser.id}/avatar.jpg`)
+    const snapshot = await audioRef.put(file)
+
+    return snapshot.ref.getDownloadURL()
 }

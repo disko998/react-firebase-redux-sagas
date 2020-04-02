@@ -32,7 +32,30 @@ export const userReducer = (state = initialState, action) => {
             return { ...state, loading: false }
 
         case UserActionTypes.UPDATE_USER_SUCCESS:
-            return { ...state, currentUser: { ...state.currentUser, ...action.payload } }
+            return {
+                ...state,
+                currentUser: {
+                    ...state.currentUser,
+                    ...action.payload,
+                    updatingAvatar: false,
+                },
+            }
+
+        case UserActionTypes.UPDATE_USER_FAILURE:
+            return {
+                ...state,
+                currentUser: {
+                    ...state.currentUser,
+                    updatingAvatar: false,
+                },
+            }
+
+        case UserActionTypes.UPLOAD_USER_AVATAR: {
+            return {
+                ...state,
+                currentUser: { ...state.currentUser, updatingAvatar: true },
+            }
+        }
 
         default:
             return state

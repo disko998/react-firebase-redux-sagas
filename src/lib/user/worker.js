@@ -6,7 +6,8 @@ import {
     facebookProvider,
     googleProvider,
     githubProvider,
-    updateUser,
+    updateUserDoc,
+    uploadAvatar,
 } from 'lib/firebase'
 import {
     loginUserSuccess,
@@ -18,6 +19,7 @@ import {
     checkUserSessionFinish,
     updateUserSuccess,
     updateUserFailure,
+    updateUser,
 } from './action'
 import { selectCurrentUser } from 'lib/user/selector'
 
@@ -125,8 +127,18 @@ export function* loginWithGithubWorker() {
 export function* updateUserWorker({ payload }) {
     try {
         const currentUser = yield select(selectCurrentUser)
-        const user = yield call(updateUser, payload, currentUser)
+        yield call(updateUserDoc, payload, currentUser)
         yield put(updateUserSuccess(payload))
+    } catch (e) {
+        yield put(updateUserFailure(e.message))
+    }
+}
+
+export function* uploadUserAvatarWorker({ payload }) {
+    try {
+        const currentUser = yield select(selectCurrentUser)
+        const avatarUrl = yield call(uploadAvatar, payload, currentUser)
+        yield put(updateUser({ avatar: avatarUrl }))
     } catch (e) {
         yield put(updateUserFailure(e.message))
     }

@@ -36,7 +36,7 @@ export function NavbarComponent({ user, updateUser }) {
                             value={name}
                             onBlur={submitName}
                         />
-                        <UserMenu avatar={user.avatar} />
+                        <UserMenu />
                     </Toolbar>
                 </Container>
             </AppBar>

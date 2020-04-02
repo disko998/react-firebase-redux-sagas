@@ -11,6 +11,7 @@ import {
     loginWithFacebookWorker,
     loginWithGithubWorker,
     updateUserWorker,
+    uploadUserAvatarWorker,
 } from './worker'
 
 function* watchLoginUser() {
@@ -49,6 +50,10 @@ function* watchUpdateUser() {
     yield takeEvery(UserActionTypes.UPDATE_USER, updateUserWorker)
 }
 
+function* watchUploadUserAvatar() {
+    yield takeEvery(UserActionTypes.UPLOAD_USER_AVATAR, uploadUserAvatarWorker)
+}
+
 export default function* userSagas() {
     yield all([
         call(watchLoginUser),
@@ -60,5 +65,6 @@ export default function* userSagas() {
         call(watchLoginWithFacebook),
         call(watchLoginWithGithub),
         call(watchUpdateUser),
+        call(watchUploadUserAvatar),
     ])
 }
