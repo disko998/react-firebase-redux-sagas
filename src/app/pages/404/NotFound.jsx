@@ -14,7 +14,7 @@ export function NotFound() {
                 alignItems: 'center',
             }}
         >
-            <img src={NotFoundImage} style={{ height: '50%' }} />
+            <img src={NotFoundImage} style={{ height: '50%' }} alt={'404 image'} />
             <h1>404: This Page is Lost In Space</h1>
         </div>
     )

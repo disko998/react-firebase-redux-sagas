@@ -1,4 +1,4 @@
-import { call, takeEvery, takeLatest, all, take, put } from 'redux-saga/effects'
+import { call, takeLatest, all, take, put } from 'redux-saga/effects'
 import { RecorderActionType } from './action'
 
 import {
