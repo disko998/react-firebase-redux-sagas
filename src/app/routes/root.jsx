@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 
-import { MainPage, AuthPage, LoadingPage } from 'app/pages'
+import { MainPage, AuthPage, LoadingPage, NotFound } from 'app/pages'
 import { selectLoading, selectCurrentUser } from 'lib/user/selector'
 import { checkUserSession } from 'lib/user/action'
 
@@ -26,6 +26,7 @@ function RootStackComponent({ userLoading, user, checkUserSession }) {
                     path='/login'
                     render={() => (user ? <Redirect to='/' /> : <AuthPage />)}
                 />
+                <Route exact path='*' component={NotFound} />
             </Switch>
         </BrowserRouter>
     )
