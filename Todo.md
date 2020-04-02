@@ -13,10 +13,10 @@ TODO:
 [x] PWA
 [x] change display name
 [x] user avatar
+[x] 404 wrong route
+[x] Empty jokes list
 
 -   firebase functions, confirm email, reset password
 -   find way to fix same joke title problem in firestore
 -   display author name
 -   pagination
--   404 wrong route
--   Empty jokes list
