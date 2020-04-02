@@ -13,6 +13,9 @@ export const UserActionTypes = {
     LOGIN_WITH_GOOGLE: 'LOGIN_WITH_GOOGLE',
     LOGIN_WITH_FACEBOOK: 'LOGIN_WITH_FACEBOOK',
     LOGIN_WITH_GITHUB: 'LOGIN_WITH_GITHUB',
+    UPDATE_USER: 'UPDATE_USER',
+    UPDATE_USER_SUCCESS: 'UPDATE_USER_SUCCESS',
+    UPDATE_USER_FAILURE: 'UPDATE_USER_FAILURE',
 }
 
 export const loginUser = credentials => ({
@@ -76,4 +79,19 @@ export const loginWithFacebook = () => ({
 
 export const loginWithGithub = () => ({
     type: UserActionTypes.LOGIN_WITH_GITHUB,
+})
+
+export const updateUser = partialData => ({
+    type: UserActionTypes.UPDATE_USER,
+    payload: partialData,
+})
+
+export const updateUserSuccess = user => ({
+    type: UserActionTypes.UPDATE_USER_SUCCESS,
+    payload: user,
+})
+
+export const updateUserFailure = errorMessage => ({
+    type: UserActionTypes.UPDATE_USER_FAILURE,
+    payload: errorMessage,
 })

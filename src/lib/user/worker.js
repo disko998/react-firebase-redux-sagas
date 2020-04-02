@@ -1,4 +1,4 @@
-import { call, put } from 'redux-saga/effects'
+import { call, put, select } from 'redux-saga/effects'
 import {
     auth,
     checkUsersSession,
@@ -6,6 +6,7 @@ import {
     facebookProvider,
     googleProvider,
     githubProvider,
+    updateUser,
 } from 'lib/firebase'
 import {
     loginUserSuccess,
@@ -15,7 +16,10 @@ import {
     logoutUserSuccess,
     logoutUserFailure,
     checkUserSessionFinish,
+    updateUserSuccess,
+    updateUserFailure,
 } from './action'
+import { selectCurrentUser } from 'lib/user/selector'
 
 export function* loginAuthUser(authUser) {
     try {
@@ -115,5 +119,15 @@ export function* loginWithGithubWorker() {
         )
             return
         yield put(loginUserFailure(e.message))
+    }
+}
+
+export function* updateUserWorker({ payload }) {
+    try {
+        const currentUser = yield select(selectCurrentUser)
+        const user = yield call(updateUser, payload, currentUser)
+        yield put(updateUserSuccess(payload))
+    } catch (e) {
+        yield put(updateUserFailure(e.message))
     }
 }

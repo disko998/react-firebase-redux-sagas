@@ -31,6 +31,9 @@ export const userReducer = (state = initialState, action) => {
         case UserActionTypes.CHECK_USER_SESSION_FINISH:
             return { ...state, loading: false }
 
+        case UserActionTypes.UPDATE_USER_SUCCESS:
+            return { ...state, currentUser: { ...state.currentUser, ...action.payload } }
+
         default:
             return state
     }

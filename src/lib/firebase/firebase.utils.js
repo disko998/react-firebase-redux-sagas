@@ -90,3 +90,22 @@ export const updateJokeLikesTransaction = async (jokeId, userId) => {
         return transaction.update(jokeRef, { likes: joke.likes })
     })
 }
+
+export const updateUser = async (partialData, currentUser) => {
+    const userRef = db.doc(`users/${currentUser.id}`)
+    const userSnapshot = await userRef.get()
+
+    if (!userSnapshot.exists) {
+        throw new Error('User does not exists')
+    }
+
+    const newUser = {
+        ...userSnapshot.data(),
+        ...partialData,
+        updatedAt: new Date(),
+    }
+
+    await userRef.update(newUser)
+
+    return newUser
+}

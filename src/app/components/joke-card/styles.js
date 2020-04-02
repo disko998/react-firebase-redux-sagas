@@ -20,6 +20,7 @@ export const useStyles = makeStyles(theme => ({
         fontWeight: 500,
         width: '100%',
         overflow: 'hidden',
+        textOverflow: 'ellipsis',
     },
     author: {
         fontSize: 15,

@@ -10,6 +10,7 @@ import {
     loginWithGoogleWorker,
     loginWithFacebookWorker,
     loginWithGithubWorker,
+    updateUserWorker,
 } from './worker'
 
 function* watchLoginUser() {
@@ -44,6 +45,10 @@ function* watchLoginWithGithub() {
     yield takeEvery(UserActionTypes.LOGIN_WITH_GITHUB, loginWithGithubWorker)
 }
 
+function* watchUpdateUser() {
+    yield takeEvery(UserActionTypes.UPDATE_USER, updateUserWorker)
+}
+
 export default function* userSagas() {
     yield all([
         call(watchLoginUser),
@@ -54,5 +59,6 @@ export default function* userSagas() {
         call(watchLoginWithGoogle),
         call(watchLoginWithFacebook),
         call(watchLoginWithGithub),
+        call(watchUpdateUser),
     ])
 }
