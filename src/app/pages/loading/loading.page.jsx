@@ -4,7 +4,7 @@ import { CircularProgress } from '@material-ui/core'
 import { SpinnerWrapper } from './styles'
 
 export const LoadingPage = () => (
-    <SpinnerWrapper>
-        <CircularProgress color='secondary' />
-    </SpinnerWrapper>
+  <SpinnerWrapper>
+    <CircularProgress color='secondary' />
+  </SpinnerWrapper>
 )

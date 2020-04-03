@@ -25,6 +25,14 @@
     "react/prop-types": "off",
     "jsx-a11y/media-has-caption": "off",
     "no-shadow": "warn",
-    "no-unused-expressions": "warn"
+    "no-unused-expressions": "warn",
+    "no-unused-vars": "warn",
+    "arrow-parens": "off",
+    "jsx-quotes": ["error", "prefer-single"],
+    "comma-dangle": "off",
+    "react/jsx-props-no-spreading": "off",
+    "operator-linebreak": "warn",
+    "import/no-unresolved": "off",
+    "implicit-arrow-linebreak": "off"
   }
 }
