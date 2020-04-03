@@ -5,5 +5,5 @@ import jokesSagas from '../jokes/saga'
 import recorderSagas from '../recorder/saga'
 
 export default function* rootSaga() {
-    yield all([call(userSagas), call(jokesSagas), call(recorderSagas)])
+  yield all([call(userSagas), call(jokesSagas), call(recorderSagas)])
 }

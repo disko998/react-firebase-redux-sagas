@@ -8,13 +8,13 @@ import { muiTheme } from './styles'
 import './App.css'
 
 function App() {
-    return (
-        <ReduxProvider store={configureStore()}>
-            <ThemeProvider theme={muiTheme}>
-                <RootStack />
-            </ThemeProvider>
-        </ReduxProvider>
-    )
+  return (
+    <ReduxProvider store={configureStore()}>
+      <ThemeProvider theme={muiTheme}>
+        <RootStack />
+      </ThemeProvider>
+    </ReduxProvider>
+  )
 }
 
 export default App

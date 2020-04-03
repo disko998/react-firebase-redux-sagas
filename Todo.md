@@ -1,4 +1,5 @@
 TODO:
+
 [x] Likes action needs to use transaction
 [x] Register user with display name
 [x] Mobile friendly
@@ -8,15 +9,14 @@ TODO:
 [x] Secure firebase and api key
 [x] host on firebase
 [x] facebook, google, github sign in
+[x] audio player attributes for better experience
+[x] PWA
+[x] change display name
+[x] user avatar
+[x] 404 wrong route
+[x] Empty jokes list
 
--   audio player attributes for better experience
--   PWA
 -   firebase functions, confirm email, reset password
 -   find way to fix same joke title problem in firestore
-
-### FEATURES:
-
 -   display author name
 -   pagination
--   user avatar
--   change display name
